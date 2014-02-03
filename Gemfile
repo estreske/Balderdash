@@ -13,6 +13,7 @@ gem 'rspec-rails'
 gem 'pry'
 gem 'pry-rails'
 gem 'devise'
+gem 'font-awesome-rails'
 
 
 # Gems used only for assets and not required

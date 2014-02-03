@@ -1,0 +1,3 @@
+class DefinitionsController < ApplicationController
+
+end
