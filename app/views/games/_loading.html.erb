@@ -1,0 +1,8 @@
+<% if current_user == @game.players.first %>
+  <button id="start_game">Start Game</button>
+<% elsif @game.players.include?(current_user) %>
+  <i class="fa fa-refresh fa-spin fa-5x"></i>
+<% else %>
+  <button id="join_game">Join Game</button>
+<% end %>
+

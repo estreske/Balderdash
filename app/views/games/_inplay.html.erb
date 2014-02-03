@@ -22,8 +22,13 @@
 		<button id="player_def_submit">Definition Submit</button>
 	</form>
 </div>
+
+<% if @game.round.definitions.count == @game.players.count + 1 %>
 <h2>Select the correct definition below</h2>
 <hr>
 <% @game.players.each do |player| %>
 	<div><%= players.definition.content %></div>
+<% end %>
+<% else %>
+
 <% end %>
