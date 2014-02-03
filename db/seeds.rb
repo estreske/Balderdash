@@ -20,7 +20,7 @@ words = []
   parsed_tr = found_trs.map do |tr|
     word, definition = tr.css('td')
     if word && definition
-      Word.create(name: word, definition: definition.text.chomp)
+      Word.create(name: word.text.chomp, definition: definition.text.chomp)
     end
   end
 end
