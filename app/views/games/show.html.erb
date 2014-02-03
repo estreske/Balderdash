@@ -1,24 +1,5 @@
-<div>
-	<table>
-		<thead>
-			<tr>
-				<td>Player Name</td>
-				<td>Score</td>
-			</tr>
-		</thead>
-		<tbody>
-			<% @players.each do |player| %>
-				<tr><td><%= player.user.name %></td><td><%= player.score %></td></tr>
-			<% end %>
-		</tbody>
-	</table>
-</div>
-
-<div class="word"><h2><%= @word.name %></h2></div>
-
-<div class="def_input">
-	<form>
-		<textarea id="player_def">
-		<button id="player_def_submit">Definition Submit</button>
-	</form>
-</div>
+<% if @game.in_session == true%>
+	<% render "inplay" %>
+<% else %>
+	<% render "loading" %>
+<% end %>
