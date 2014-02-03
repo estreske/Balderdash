@@ -8,6 +8,12 @@ gem 'rails', '3.2.16'
 gem 'pg'
 gem 'nokogiri'
 gem 'open-uri'
+gem 'capybara'
+gem 'rspec'
+gem 'rspec-rails'
+gem 'pry'
+gem 'pry-rails'
+gem 'devise'
 
 
 # Gems used only for assets and not required
