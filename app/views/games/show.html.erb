@@ -1,0 +1,5 @@
+<% if @game.in_session == true%>
+	<% render "inplay" %>
+<% else %>
+	<% render "loading" %>
+<% end %>

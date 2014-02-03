@@ -1,0 +1,9 @@
+<ul class="list-unstyled">
+	<% @games.each do |game| %>
+	<li><a href="<%= game_path(game) %>">Game Room #<%= game.id %></a></li>
+	<% end %>
+</ul>
+
+<form method="post" action="<%= games_path %>">
+<button type="submit" class="btn btn-primary">CREATE A NEW GAME</button>
+</form>
