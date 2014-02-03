@@ -3,7 +3,7 @@ Balderdash::Application.routes.draw do
 
   root :to => "home#index"
 
-  put 'game/:id/start' => "games#start"
+  put 'games/:id/start' => "games#start"
 
   resources :games, :except => [:edit, :update, :new]
   resources :players, :only => [:create, :destroy, :update]
