@@ -20,7 +20,8 @@ words = []
   parsed_tr = found_trs.map do |tr|
     word, definition = tr.css('td')
     if word && definition
-      Word.create(word: word.text.chomp, definition: definition.text.chomp)
+      word_without_comma = word.text.chomp.gsub(",","")
+      Word.create(name: word_without_comma, definition: definition.text.chomp)
     end
   end
 end

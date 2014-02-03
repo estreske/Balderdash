@@ -1,3 +1,3 @@
 class Word < ActiveRecord::Base
-  attr_accessible :definition, :word
+  attr_accessible :definition, :name
 end
