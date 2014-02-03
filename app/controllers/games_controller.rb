@@ -8,6 +8,11 @@ class GamesController < ApplicationController
 		game = Game.new
 		game.in_session = false
 		game.save
+		user = current_user
+		player = Player.create({
+			user: user,
+			game: game,
+			})
 		redirect_to game_path(game)
 	end
 # game GET    /games/:id(.:format)           games#show

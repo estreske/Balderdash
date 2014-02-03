@@ -27,7 +27,7 @@
 <h2>Select the correct definition below</h2>
 <hr>
 <% @game.players.each do |player| %>
-	<div><%= players.definition.content %></div>
+	<div><%= player.definition.content %></div>
 <% end %>
 <% else %>
 
