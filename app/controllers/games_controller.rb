@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 # games GET    /games(.:format)               games#index
 	def index
-		@games = Game.all?
+		@games = Game.all
 	end
 #      POST   /games(.:format)               games#create
 	def create
@@ -15,5 +15,11 @@ class GamesController < ApplicationController
 		@game = Game.find(params[:id])
 	end
 #      DELETE /games/:id(.:format)           games#destroy
+	def start
+		game = Game.find(params[:id])
+		game.in_session= true
+		game.save
+		redirect_to game_path(game)
+	end
 
 end
