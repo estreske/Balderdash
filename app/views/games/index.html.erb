@@ -6,5 +6,6 @@
 </ul>
 <!-- SAllow users to create a new game -->
 <form method="post" action="<%= games_path %>">
-<button type="submit" class="btn btn-primary">Create a Game</button>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+	<button type="submit" class="btn btn-primary">Create a Game</button>
 </form>

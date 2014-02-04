@@ -22,8 +22,7 @@ class GamesController < ApplicationController
 #      DELETE /games/:id(.:format)           games#destroy
 	def start
 		game = Game.find(params[:id])
-		game.in_session= true
-		game.save
+		game.start
 		redirect_to game_path(game)
 	end
 
