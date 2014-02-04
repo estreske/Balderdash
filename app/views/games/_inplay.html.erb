@@ -76,10 +76,18 @@
 	</ul>
 
 	<!-- Start Next Round -->
-
+	<% if @game.rounds.count < 7 %>
+		 
 	<form method="post" action="<%= rounds_path %>">
 		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 		<input type="hidden" name="game_id" value="<%= @game.id %>">
 		<button type="submit" id="submit">Next Round</button>
 	</form>
+
+	<% elsif @game.rounds.count == 7 %>
+		<form action="<%= game_complete_path(@game) %>">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+		<button type="submit" id="submit">Complete Game</button>
+	</form>
+	<% end %>
 	<% end %>
