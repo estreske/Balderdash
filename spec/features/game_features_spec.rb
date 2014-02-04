@@ -11,6 +11,9 @@ describe GamesController do
 		before do
 			@session1.visit games_path
 		end
+		it "should welcome the user by name" do
+			@session1.body.should have_content("Welcome #{@user.name}")
+		end
 		it "should display all the games" do
 			@session1.body.should have_content('Game')
 		end
