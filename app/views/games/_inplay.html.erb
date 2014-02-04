@@ -1,4 +1,5 @@
 <!-- Always show the word for the round -->
+<div class="current_round"><h2>Round #<%= @game.rounds.count %></h2></div>
 <div class="word"><h2><%= @game.rounds.last.word.name %></h2></div>
 
 <!-- If not all of the players have guessed yet -->
