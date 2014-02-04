@@ -48,7 +48,7 @@ describe GamesController do
 							@session2.body.should have_content(@user_2.name)
 						end
 						describe "the first user can start the game" do
-							before do
+							before do 
 								@session1.click_button('Start Game')
 							end
 							it "should show a word" do
