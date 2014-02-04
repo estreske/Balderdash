@@ -1,18 +1,61 @@
-<div class="word"><h2><%= @word.name %></h2></div>
+<!-- Always show the word for the  round -->
 
-<div class="def_input">
-	<form>
-		<textarea id="player_def">
-		<button id="player_def_submit">Definition Submit</button>
-	</form>
-</div>
+<div class="word"><h2><%= @game.rounds.last.word.name %></h2></div>
 
-<% if @game.round.definitions.count == @game.players.count + 1 %>
+<!-- If all of the users haven't guessed yet -->
+
+
+<% if @game.rounds.last.definitions.count < (@game.players.count + 1) %>
+	<!-- But this user has guessed-->
+
+
+	<% if @game.rounds.last.guessed_players.include?(@current_player) %>
+	<i class="fa fa-refresh fa-spin fa-5x"></i>
+
+	<!-- Or if this user hasn't guessed yet -->
+
+	<% else %>
+	<div class="def_input">
+		<form method="post" action="<%= definitions_path %>">
+			<input type="text" name="content" id="player_def">
+			<input type="hidden" name="round_id" value="<%= @game.rounds.last.id %>">
+			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+			<button type="submit" id="player_def_submit">Submit</button>
+		</form>
+	</div>
+	<% end %>
+
+	<!-- If they have all guessed -->
+
+<% elsif @game.rounds.last.guessed_players.count == @game.players.count && @game.rounds.last.picks.count < @game.players.count %>
 <h2>Select the correct definition below</h2>
 <hr>
-<% @game.players.each do |player| %>
-	<div><%= player.definition.content %></div>
-<% end %>
-<% else %>
+	<% @game.rounds.last.definitions.each do |definition| %>
+	<form method="post" action="<%= picks_path %>">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+	<input type="hidden" name="definition_id" value="<%= definition.id %>">
+	<button type="submit" id="submit_<%= definition.id %>">
+		<%= definition.content %></button>
+	</form>
+	<% end %>
 
+	<!-- If they have all picked-->
+
+<% elsif @game.rounds.last.picks.count >= @game.players.count %>
+	<h4>The correct definition is:</h4>
+	<h2><%= @game.rounds.last.word.definition %></h2>
+	<ul>
+	<% @game.rounds.last.picks.each do |pick|  %>
+		<% if pick.definition.player %>
+		<li><%= pick.player.user.name %> picked <%= pick.definition.player.user.name %>'s answer. </li>
+		<% else %>
+		<li><%= pick.player.user.name %> picked the right definition!</li>
+		<% end %>
+	<% end %>
+	</ul>
+	<form method="post" action="<%= rounds_path %>">
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+		<input type="hidden" name="game_id" value="<%= @game.id %>">
+		<button type="submit" id="submit">Next Round</button>
+	</form>
 <% end %>

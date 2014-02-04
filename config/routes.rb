@@ -8,4 +8,6 @@ Balderdash::Application.routes.draw do
   resources :games, :except => [:edit, :update, :new]
   resources :players, :only => [:create, :destroy, :update]
   resources :picks, :only => [:create, :destroy]
+  resources :definitions, :only => [:create]
+  resources :rounds, :only => [:create]
 end

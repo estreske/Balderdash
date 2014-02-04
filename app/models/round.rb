@@ -3,7 +3,7 @@ class Round < ActiveRecord::Base
 
   belongs_to :word
   belongs_to :game
-  has_many :guessed_players, through: :definitions, source: :players
+  has_many :guessed_players, :through => :definitions, :source => :player
   has_many :definitions
   has_many :picks, through: :definitions
 

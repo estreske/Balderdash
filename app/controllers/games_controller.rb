@@ -18,8 +18,8 @@ class GamesController < ApplicationController
 # game GET    /games/:id(.:format)           games#show
 	def show
 		@game = Game.find(params[:id])
-		if Player.find(current_user.id)
-			current_player = Player.find
+		if Player.find_by_user_id(current_user.id)
+			@current_player = Player.find_by_user_id(current_user.id)
 		end
 	end
 #      DELETE /games/:id(.:format)           games#destroy
