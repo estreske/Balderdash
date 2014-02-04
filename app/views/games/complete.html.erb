@@ -1,0 +1,22 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td>Player Name</td>
+        <td>Score</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @players.each do |player| %>
+        <tr><td><%= player.user.name %></td><td><%= player.score %></td></tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="winner">
+  <h1>Congratulations <%= @winner %>!</h1>
+  </div>
+
+  link_to "Return to Games Page", game_path
+
