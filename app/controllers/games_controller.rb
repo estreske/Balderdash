@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+before_filter :authenticate_user!
+
 # games GET    /games(.:format)               games#index
 	def index
 		@games = Game.all
@@ -18,8 +20,9 @@ class GamesController < ApplicationController
 # game GET    /games/:id(.:format)           games#show
 	def show
 		@game = Game.find(params[:id])
-		if Player.find_by_user_id(current_user.id)
-			@current_player = Player.find_by_user_id(current_user.id)
+		@current_round = @game.rounds.last
+		if Player.where(user_id: current_user.id, game_id: @game.id).first
+			@current_player = Player.where(user_id: current_user.id, game_id: @game.id).first
 		end
 	end
 #      DELETE /games/:id(.:format)           games#destroy

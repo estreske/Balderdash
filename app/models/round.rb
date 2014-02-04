@@ -12,4 +12,11 @@ class Round < ActiveRecord::Base
     round = Round.create(word: word, game: game)
     Definition.create(round: round, content: word.definition)
   end
+
+  def picked_players 
+    picks.map do |pick| 
+      pick.player
+    end
+  end
+
 end
