@@ -1,7 +1,7 @@
 <!-- Show all of the games -->
 <ul class="list-unstyled">
 	<% @games.each do |game| %>
-	<li><a id="<%= game.id %>" href="<%= game_path(game) %>">Game Room #<%= game.id %></a></li>
+	<li><a id="game_room_<%= game.id %>" href="<%= game_path(game) %>">Game Room #<%= game.id %></a></li>
 	<% end %>
 </ul>
 <!-- SAllow users to create a new game -->

@@ -1,5 +1,4 @@
-<!-- Always show the word for the  round -->
-
+<!-- Always show the word for the round -->
 <div class="word"><h2><%= @game.rounds.last.word.name %></h2></div>
 
 <!-- If not all of the players have guessed yet -->
@@ -29,7 +28,7 @@
 <!-- If all the players have guessed -->
 <% elsif @game.rounds.last.guessed_players.count == @game.players.count && @game.rounds.last.picks.count < @game.players.count %>
 
-<!-- But they have already picked -->
+<!-- But this player has already picked -->
 <% if @game.rounds.last.picked_players.include?(@current_player) %>
 
 <!-- Show them a spinning wheel  -->
@@ -38,9 +37,9 @@
 <i class="fa fa-refresh fa-spin fa-5x"></i>
 
 
-<!-- But if they haven't picked yet -->
+<!-- But if this player hasn't picked yet -->
 <% else %>
-<!-- Let them pick one of the definitions -->
+<!-- Let this player pick one of the definitions -->
 
 
 
