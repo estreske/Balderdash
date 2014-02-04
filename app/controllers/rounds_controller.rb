@@ -4,7 +4,7 @@ class RoundsController < ApplicationController
     if game.rounds.count < 7
 		  Round.begin(game)
 		  redirect_to game_path(game)
-    elsif game.rounds.count = 7
+    elsif game.rounds.count == 7
       redirect_to game_complete_path(game)
     end
 	end
