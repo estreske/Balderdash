@@ -46,7 +46,8 @@
 
 <h2>Select the correct definition below</h2>
 <hr>
-<% @game.rounds.last.definitions.each do |definition| %>
+
+<% @game.rounds.last.definitions.shuffle.each do |definition| %>
 <form method="post" action="<%= picks_path %>">
 	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 	<input type="hidden" name="definition_id" value="<%= definition.id %>">
@@ -67,7 +68,7 @@
 		<!-- If the definition that this user picked WAS created by a player -->
 		<% if pick.definition.player %>
 		<li><%= pick.player.user.name %> picked <%= pick.definition.player.user.name %>'s answer. </li>
-		
+
 		<!-- If the definition that this user picked WAS NOT created by a player -->
 		<!-- it was the correct definition -->
 		<% else %>
