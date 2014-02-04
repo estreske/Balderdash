@@ -1,4 +1,5 @@
 <!-- Always show the word for the round -->
+<div class="current_round"><h2>Round #<%= @game.rounds.count %></h2></div>
 <div class="word"><h2><%= @game.rounds.last.word.name %></h2></div>
 
 <!-- If not all of the players have guessed yet -->
@@ -77,10 +78,18 @@
 	</ul>
 
 	<!-- Start Next Round -->
-
+	<% if @game.rounds.count < 7 %>
+		 
 	<form method="post" action="<%= rounds_path %>">
 		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 		<input type="hidden" name="game_id" value="<%= @game.id %>">
 		<button type="submit" id="submit">Next Round</button>
 	</form>
+
+	<% elsif @game.rounds.count == 7 %>
+		<form action="<%= game_complete_path(@game) %>">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+		<button type="submit" id="submit">Complete Game</button>
+	</form>
+	<% end %>
 	<% end %>

@@ -35,7 +35,7 @@ before_filter :authenticate_user!
 	def complete
 		game = Game.find(params[:id])
 		@players = game.players.find(:all, :order => 'score desc')
-		@winner = @players.first.name
+		@winner = @players.first.user.name
 	end
 
 end
