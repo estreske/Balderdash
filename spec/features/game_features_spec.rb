@@ -23,22 +23,31 @@ describe GamesController do
 				@session1.body.should have_content('Billy Joel')
 			end
 		end
-		# describe "if there is another user" do 
-		# 	before do 
-		# 		@user_2 = User.create(email: 'example2@email.com', password: 'password', name: 'Sandra D')
-		# 		login_as(@user_2)
-		# 		@game = Game.create(in_session: false)
-		# 		Player.create(user: @user, game: @game)
-		# 	end
-		# 	describe "when they click on one of the games listed" do 
-		# 		before do 
-		# 			click_link(@game.id.to_s)
-		# 		end
-		# 		it 'should redirect to the game page' do 
-		# 			page.should have_content(@user.name)
-		# 		end
-		# 		it 'should '
-		# 	end
-		# end
+	end
+	describe "if there is another user" do 
+		before do 
+			@session2 = Capybara::Session.new(:rack_test, Balderdash::Application)
+			@user_2 = User.create(email: 'example2@email.com', password: 'password', name: 'Sandra D')
+			@session2.login_as(@user_2)
+			@game = Game.create(in_session: false)
+			Player.create(user: @user, game: @game)
+		end
+		describe "when they click on one of the games listed" do 
+			before do 
+				@session2.visit games_path
+				@session2.click_link(@game.id.to_s)
+			end
+			it 'should redirect to the game page' do 
+				@session2.body.should have_content(@user.name)
+			end
+			describe 'when clicking join game' do
+				before do
+					@session2.click_button('join_game')
+				end
+				it 'should become a player in the game' do
+					@game.players.should_include(@user_2)
+				end
+			end
+		end
 	end
 end
