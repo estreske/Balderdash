@@ -1,0 +1,31 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td>Player Name</td>
+        <td>Score</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @players.each do |player| %>
+        <tr><td><%= player.user.name %></td><td><%= player.score %></td></tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="winner">
+  
+  <% if @winners.count == 1 %>
+    <h1>Congratulations <%= @winners.first.user.name %>!</h1>
+  <% elsif @winners.count > 1 %>
+    <% @winners.each do |winner| %>
+    <h1><%= winner.user.name %></h1>
+    <% end %>
+    <h1>have tied for First Place!</h1>
+    <% end %>
+
+  </div>
+
+  <%= link_to "Return to Games Page", games_path %>
+

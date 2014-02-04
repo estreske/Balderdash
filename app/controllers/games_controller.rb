@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+before_filter :authenticate_user!
+
 # games GET    /games(.:format)               games#index
 	def index
 		@games = Game.all
@@ -28,6 +30,17 @@ class GamesController < ApplicationController
 		game = Game.find(params[:id])
 		game.start
 		redirect_to game_path(game)
+	end
+# once a game has reached 7 rounds
+	def complete
+		game = Game.find(params[:id])
+		@players = game.players.find(:all, :order => 'score desc')
+		@winners = []
+		@players.each do |player|
+			if player.score == @players.first.score
+				@winners << player
+			end
+		end
 	end
 
 end

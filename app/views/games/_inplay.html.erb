@@ -1,4 +1,5 @@
 <!-- Always show the word for the round -->
+<div class="current_round"><h2>Round #<%= @game.rounds.count %></h2></div>
 <div class="word"><h2><%= @game.rounds.last.word.name %></h2></div>
 
 <!-- If not all of the players have guessed yet -->
@@ -45,7 +46,8 @@
 
 <h2>Select the correct definition below</h2>
 <hr>
-<% @game.rounds.last.definitions.each do |definition| %>
+
+<% @game.rounds.last.definitions.shuffle.each do |definition| %>
 <form method="post" action="<%= picks_path %>">
 	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 	<input type="hidden" name="definition_id" value="<%= definition.id %>">
@@ -65,8 +67,8 @@
 		<% @game.rounds.last.picks.each do |pick|  %>
 		<!-- If the definition that this user picked WAS created by a player -->
 		<% if pick.definition.player %>
-		<li><%= pick.player.user.name %> picked <%= pick.definition.player.user.name %>'s answer. </li>
-		
+		<li><%= pick.player.user.name %> picked <%= pick.definition.content %>, <%= pick.definition.player.user.name %>'s answer! </li>
+
 		<!-- If the definition that this user picked WAS NOT created by a player -->
 		<!-- it was the correct definition -->
 		<% else %>
@@ -76,10 +78,18 @@
 	</ul>
 
 	<!-- Start Next Round -->
+	<% if @game.rounds.count < 7 %>
 
 	<form method="post" action="<%= rounds_path %>">
 		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 		<input type="hidden" name="game_id" value="<%= @game.id %>">
 		<button type="submit" id="submit">Next Round</button>
 	</form>
+
+	<% elsif @game.rounds.count == 7 %>
+		<form action="<%= game_complete_path(@game) %>">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+		<button type="submit" id="submit">Complete Game</button>
+	</form>
+	<% end %>
 	<% end %>
