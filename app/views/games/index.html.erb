@@ -2,7 +2,7 @@
 <ul class="list-unstyled">
 	<% @games.each do |game| %>
 	<% if game.in_session == false %>
-	<li><a id="<%= game.id %>" href="<%= game_path(game) %>"><%= game.players.first.user.name %>'s Game Room</a></li>
+	<li><a class="game-room" id="<%= game.id %>" href="<%= game_path(game) %>"><%= game.players.first.user.name %>'s Game Room</a></li>
 	<% end %>
 	<% end %>
 </ul>
