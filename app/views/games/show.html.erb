@@ -1,5 +1,21 @@
-<% if @game.in_session == false%>
+<% if @game.in_session == false %>
   <% render "loading" %>
 <% else %>
 	<% render "inplay" %>
 <% end %>
+
+<div>
+	<table>
+		<thead>
+			<tr>
+				<td>Player Name</td>
+				<td>Score</td>
+			</tr>
+		</thead>
+		<tbody>
+			<% @game.players.each do |player| %>
+				<tr><td><%= player.user.name %></td><td><%= player.score %></td></tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
