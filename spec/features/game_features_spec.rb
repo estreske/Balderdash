@@ -21,6 +21,7 @@ describe GamesController do
 			it "should create the game and a player and redirect" do
 				@session1.current_path.should == game_path(Game.all.last)
 				@session1.body.should have_content('Billy Joel')
+				@session1.body.should have_content('Start Game')
 			end
 		end
 	end
@@ -30,7 +31,7 @@ describe GamesController do
 			@user_2 = User.create(email: 'example2@email.com', password: 'password', name: 'Sandra D')
 			@session2.login_as(@user_2)
 			@game = Game.create(in_session: false)
-			Player.create(user: @user, game: @game)
+			@current_player = Player.create(user: @user, game: @game)
 		end
 		describe "when they click on one of the games listed" do 
 			before do 
@@ -45,9 +46,21 @@ describe GamesController do
 					@session2.click_button('join_game')
 				end
 				it 'should become a player in the game' do
-					@game.players.should_include(@user_2)
+					@session2.body.should have_content(@user_2.name)
 				end
+			end
+		end
+		describe 'when the creator wants to start the game' do
+			before do 
+				binding.pry
+				@session1.click_button('start_game')
+			end
+			it "should start the game" do 
+				@game.rounds.last.word.should != nil
 			end
 		end
 	end
 end
+
+
+

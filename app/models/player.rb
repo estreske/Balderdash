@@ -3,6 +3,8 @@ class Player < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :game
+  has_one :definition
+  has_one :pick
 
   def add_point
   	self.score += 1

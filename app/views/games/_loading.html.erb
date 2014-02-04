@@ -1,13 +1,15 @@
-<% if current_user == @game.players.first %>
+<% if current_user == @game.players.first.user %>
   <form action="/games/<%= @game.id %>/start" method="post">
     <input type="hidden" name="_method" value="put" />
-    <button id="start_game">Start Game</button>
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+    <button type="submit" id="start_game">Start Game</button>
   </form>
-<% elsif @game.players.include?(current_user) %>
+<% elsif @game.users.include?(current_user) %>
   <i class="fa fa-refresh fa-spin fa-5x"></i>
 <% else %>
-  <form action="/players" method="post">
-    <input type="hidden" name="game" value="<%= @game.id %>" />
-    <button id="join_game">Join Game</button>
+  <form action="<%= players_path %>" method="post">
+    <input type="hidden" name="game_id" value="<%= @game.id %>" />
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+    <button type="submit" id="join_game">Join Game</button>
   </form>
 <% end %>

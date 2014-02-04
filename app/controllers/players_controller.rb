@@ -2,12 +2,11 @@ class PlayersController < ApplicationController
  # players POST   /players(.:format)             players#create
  	def create
  		user = current_user
- 		game = params[:game_id]
- 		player = Player.new({
+ 		game = Game.find(params[:game_id])
+ 		player = Player.create({
  			user: user,
  			game: game
  			})
- 		player.save
  		redirect_to game_path(game)
  	end
  #  player PUT    /players/:id(.:format)         players#update
