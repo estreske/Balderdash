@@ -15,7 +15,14 @@
 </div>
 
 <div id="winner">
-  <h1>Congratulations <%= @winner %>!</h1>
+  <% @winners.each do |winner| %>
+  <% if @winners.count == 1 %>
+    <h1>Congratulations <%= winner.user.name %>!</h1>
+  <% elsif @winners.count > 1 %>
+    <h1><%= winner.user.name %></h1>
+    <% end %>
+    <% end %>
+    <h1>have tied for 1st place!</h1>
   </div>
 
   <%= link_to "Return to Games Page", games_path %>
