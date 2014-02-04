@@ -1,11 +1,10 @@
 <!-- Show all of the games -->
 <ul class="list-unstyled">
 	<% @games.each do |game| %>
-  <% if game.in_session == false %>
+	<% if game.in_session == false %>
 	<li><a id="<%= game.id %>" href="<%= game_path(game) %>"><%= game.players.first.user.name %>'s Game Room</a></li>
-  <% else %>
 	<% end %>
-  <% end %>
+	<% end %>
 </ul>
 <!-- SAllow users to create a new game -->
 <form method="post" action="<%= games_path %>">
