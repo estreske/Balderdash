@@ -14,7 +14,6 @@ class PicksController < ApplicationController
 		if definition.player
 			# if user picks own definition
 			if definition.player == player
-				return 'cheater'
 			# if user picks one of the other users' definitions
 			else
 			definition.player.add_point
@@ -29,4 +28,7 @@ class PicksController < ApplicationController
 
 		redirect_to game_path(game)
 	end
+
+
+
 end
