@@ -64,8 +64,12 @@
 	<h2><%= @game.rounds.last.word.definition %></h2>
 	<ul>
 		<% @game.rounds.last.picks.each do |pick|  %>
+		<!-- If the definition that this user picked WAS created by a player -->
 		<% if pick.definition.player %>
 		<li><%= pick.player.user.name %> picked <%= pick.definition.player.user.name %>'s answer. </li>
+		
+		<!-- If the definition that this user picked WAS NOT created by a player -->
+		<!-- it was the correct definition -->
 		<% else %>
 		<li><%= pick.player.user.name %> picked the right definition!</li>
 		<% end %>
