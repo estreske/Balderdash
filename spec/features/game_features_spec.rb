@@ -45,7 +45,7 @@ describe GamesController do
 					@session2.click_button('join_game')
 				end
 				it 'should become a player in the game' do
-					@game.players.should_include(@user_2)
+					@session2.body.should have_content(@user_2.name)
 				end
 			end
 		end

@@ -18,12 +18,14 @@ class GamesController < ApplicationController
 # game GET    /games/:id(.:format)           games#show
 	def show
 		@game = Game.find(params[:id])
+		if Player.find(current_user.id)
+			current_player = Player.find
+		end
 	end
 #      DELETE /games/:id(.:format)           games#destroy
 	def start
 		game = Game.find(params[:id])
-		game.in_session= true
-		game.save
+		game.start
 		redirect_to game_path(game)
 	end
 
