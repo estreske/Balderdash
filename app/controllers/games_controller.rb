@@ -31,5 +31,11 @@ before_filter :authenticate_user!
 		game.start
 		redirect_to game_path(game)
 	end
+# once a game has reached 7 rounds
+	def complete
+		game = Game.find(params[:id])
+		@players = game.players.find(:all, :order => 'score desc')
+		@winner = @players.first.name
+	end
 
 end
