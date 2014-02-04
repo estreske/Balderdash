@@ -9,7 +9,7 @@ Balderdash::Application.routes.draw do
 
   put 'games/:id/start' => "games#start"
 
-  get '/games/:id/complete' => "games#complete", as: "game_complete_path"
+  get '/games/:id/complete' => "games#complete", as: "game_complete"
 
   resources :games, :except => [:edit, :update, :new]
   resources :players, :only => [:create, :destroy, :update]
