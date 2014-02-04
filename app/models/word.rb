@@ -4,7 +4,7 @@ class Word < ActiveRecord::Base
   has_many :rounds
 
   def self.pick
-  	id = rand(1..Word.count)
+  	id = rand(Word.first.id..Word.last.id)
   	word = Word.find(id)
   	return word
   end
