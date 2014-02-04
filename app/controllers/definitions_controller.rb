@@ -7,6 +7,7 @@ class DefinitionsController < ApplicationController
 		Definition.create(player: player, round: round, content: content)
 
 		game = round.game
+		
 		redirect_to game_path(game)
 	end
 

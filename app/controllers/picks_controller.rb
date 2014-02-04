@@ -7,16 +7,26 @@ class PicksController < ApplicationController
 		player = Player.find_by_user_id(current_user.id)
 		Pick.create(player: player, definition: definition)
 		
-		# if the definition is correct
+		
+		#  add points at the end of each round
+		# -----------------
+
 		if definition.player
+			# if user picks own definition
+			if definition.player.user == current_user
+				return 'cheater'
+			# if user picks one of the other users' definitions
+			else
 			definition.player.add_point
-		# if user picks own definition
-		elsif definition.player == nil
+			end
+		
+		# if the definition is correct 
+		# (if the picked definition doesn't have a player_creator)
+		else
 			player.add_point
-		# if user picks a different user's definition
-		elsif definition.player.user == current_user
-			return 'cheater'
 		end
+
+
 		redirect_to game_path(game)
 	end
 end
