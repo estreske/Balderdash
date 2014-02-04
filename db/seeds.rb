@@ -19,10 +19,16 @@ words = []
 
   parsed_tr = found_trs.map do |tr|
     word, definition = tr.css('td')
+    
     if word && definition
-      Word.create(name: word.text.chomp, definition: definition.text.chomp)
+      words << {name: word.text.chomp, definition: definition.text.chomp}
     end
   end
+end
+
+
+(0..1000).each do |x|
+  Word.create(name: words.shuffle[x][:name], definition: words.shuffle[x][:definition])
 end
 
 Word.where(name: "\n\nWord\n").destroy_all
