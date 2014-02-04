@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
  # players POST   /players(.:format)             players#create
  	def create
  		user = current_user
- 		game = game[:game_id]
+ 		game = Game.find(params[:game_id])
  		player = Player.new({
  			user: user,
  			game: game

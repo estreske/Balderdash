@@ -7,7 +7,7 @@
   <i class="fa fa-refresh fa-spin fa-5x"></i>
 <% else %>
   <form action="/players" method="post">
-    <input type="hidden" name="game" value="<%= @game.id %>" />
-    <button id="join_game">Join Game</button>
+    <input type="hidden" name="game_id" value="<%= @game.id %>" />
+    <button type="submit" id="join_game">Join Game</button>
   </form>
 <% end %>
