@@ -52,7 +52,6 @@ describe GamesController do
 		end
 		describe 'when the creator wants to start the game' do
 			before do 
-				binding.pry
 				@session1.click_button('start_game')
 			end
 			it "should start the game" do 

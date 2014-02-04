@@ -1,11 +1,19 @@
+<!-- the current user created this game --> 
+
 <% if current_user == @game.players.first.user %>
   <form action="/games/<%= @game.id %>/start" method="post">
     <input type="hidden" name="_method" value="put" />
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
     <button type="submit" id="start_game">Start Game</button>
   </form>
+
+<!-- the current has joined this game --> 
+
 <% elsif @game.users.include?(current_user) %>
   <i class="fa fa-refresh fa-spin fa-5x"></i>
+
+<!-- the current hasn't joined this game yet --> 
+
 <% else %>
   <form action="<%= players_path %>" method="post">
     <input type="hidden" name="game_id" value="<%= @game.id %>" />
