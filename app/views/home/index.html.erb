@@ -1,7 +1,7 @@
 <div class="center">
 <h1>BALDERDASH</h1>
 <p>Players create fraudulent answers, mix in the correct answer, and everyone votes on which answer is the real one.</p>
-<div class="col-md-5" >
+<div class="col-sm-5" >
 <h2>Sign in</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
@@ -18,20 +18,20 @@
   <div><%= f.submit "Sign in" %></div>
 <% end %>
 </div>
-<div class="col-md-1" style="border-left:1px solid #000;height:400px"></div>
+<div class="col-sm-1" style="border-left:1px solid #000;height:400px"></div>
 <div class="col-sm-5">
 <h2>Sign up</h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
+ 
+  <div><%= f.label :name %><br />
+  <%= f.text_field :name %></div>
+  
   <div><%= f.label :email %><br />
   <%= f.email_field :email%></div>
 
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name %></div>
-
-  <div><%= f.label :password %><br />
+ <div><%= f.label :password %><br />
   <%= f.password_field :password %></div>
 
   <div><%= f.label :password_confirmation %><br />
@@ -41,3 +41,4 @@
 <% end %>
 </div>
 </div>
+

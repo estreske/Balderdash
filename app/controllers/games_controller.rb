@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+before_filter :authenticate_user!
+
 # games GET    /games(.:format)               games#index
 	def index
 		@games = Game.all

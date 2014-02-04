@@ -1,6 +1,10 @@
 Balderdash::Application.routes.draw do
   devise_for :users
 
+  authenticated :user do
+  root :to => "games#index"
+  end
+
   root :to => "home#index"
 
   put 'games/:id/start' => "games#start"
