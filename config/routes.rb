@@ -11,7 +11,7 @@ Balderdash::Application.routes.draw do
 
   get '/games/:id/win' => "games#win", as: "game_win"
 
-  get '/games/ajax' => 'games#ajax'
+  get '/games/:id/begin' => 'games#begin'
 
   get '/games/players' => 'games#players'
 
