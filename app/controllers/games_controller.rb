@@ -16,16 +16,20 @@ before_filter :authenticate_user!
 			game: game,
 			})
 		
-		render :json => {game: game, player: player}.to_json
-		#redirect_to game_path(game)
+		# render :json => {game: game, player: player}.to_json
+		redirect_to game_path(game)
 	end
 # game GET    /games/:id(.:format)           games#show
 	def show
 		## when the show page is initially rendered
 		respond_to do |format|
+			format.html do 
+				@game = Game.find(params[:id])
+				render :show
+			end
 			format.json do
 				game = Game.find(params[:id])
-				render :json => {game: game, players: game.players}.to_json
+				render :json => {game_id: params[:id], players: game.players_to_json, in_session: game.in_session}
 				# HOW DO WE KNOW IF THE CURRENT USE IS A PLAYER OR NOT?
 				## HOW DO WE KNOW IF THE CURRENT USER IS PLAYER #1?
 			end
