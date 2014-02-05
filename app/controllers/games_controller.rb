@@ -50,16 +50,16 @@ before_filter :authenticate_user!
 		#redirect_to game_path(game)
 	end
 
-	def ajax 
+	def begin 
 		## waits til game is in_session
 		## then returns game, round, and word
 		game = Game.find(params[:game_id])
 		respond_to do |format|
 			format.json do
 				if game.in_session
-					render :json => {status: 'in_session', game: game, round: game.rounds.last, word: game.rounds.last.word}.to_json
+					render :json => {status: 'in_session'}
 				else
-					render :json => {status: 'waiting'}.to_json
+					render :json => {status: 'waiting'}
 				end
 			end
 		end

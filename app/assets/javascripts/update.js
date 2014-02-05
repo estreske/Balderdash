@@ -19,7 +19,6 @@
 // 		}, 3000);
 // });
 
-
 function Game(id, in_session){
 	var hash = this.add();
 	this.id = hash["id"];
@@ -32,7 +31,8 @@ Game.prototype = {
 		// returns json data on success
 	},
 	joinGame: function(){
-		//ajax call to '/player/create'
+		// ajax call to '/player/create'
+		// instantiates a player in the database with the current user and the current game
 	}
 }
 
@@ -56,7 +56,7 @@ GameView.prototype = {
 
 GameView.prototype = {
 	beginRound: function(){
-	// make ajax request to fill Round with data 
+	// make ajax request to fill a new round with data 
 	// render word << SHOULD THIS CALL A DIFFERENT FUNCTION TO RENDER THE WORD? A ROUND FUNCTION?
 	},
 	finishRound: function(){
@@ -75,22 +75,24 @@ function PlayerView(){
 }
 
 PlayerView.prototype = {
+	
+	var players = []
+
 	fetch: function(){
 		$.ajax({
 		url: '/games/players', 
 		dataType: 'json', 
 		method: 'get',
-			success: function(data){
-				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
-				console.log(data[:players]);
-				} else {
-				console.log('waiting for the players to show up');
-				};
-			},
-			error: function(data){
-				console.log('error');
-			},
+		success: function(data){
+		//	if( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
+		//	console.log(data[:players]);
+		//	} else {
+		//	console.log('waiting for the players to show up');
+		//	};
 		},
+		error: function(data){
+			console.log('error');
+		}
 	},
 	setFetch: function(){
 	setInterval(function() {
@@ -103,28 +105,23 @@ PlayerView.prototype = {
 }
 
 
-function Player(){
-	var hash = this.add();
-	this.game = hash["game"];  // ***** ASK TOMORROW ******
-	this.score = hash["score"];
-	this.id = hash["id"];
+function Player(game_id, score, name){
+	this.game_id = game;  //  ***** ASK TOMORROW ****** game v. game.id
+	this.score = score;
+	this.name = name;
+	this.id = id;
 }
 
 Player.prototype = {
-	add: function() {
-		// Make the AJAX call to create a new Player
-		// returns json data on success
+	render: function(){
+	// creates tr with player name and score 
+		// have to get name from the player's user 
 	}
-}
-
-
-Player.prototype.render(){
-	// creates tr
 }
 
 function Round(){
 	var hash = this.add();
-	this.game = hash["game"];  // ***** ASK TOMORROW ******
+	this.game = hash["game"];  // ***** ASK TOMORROW ****** game v. game.id
 	this.word = hash["word"];
 	this.id = hash["id"];
 }
@@ -170,7 +167,7 @@ RoundView.prototype = {
 
 function Definition(){
 	var hash = this.add()
-	this.round_id = hash["round_id"]; // ***** ASK TOMORROW ******
+	this.round_id = hash["round_id"]; // ***** ASK TOMORROW ****** round v. round.id
 	this.content = hash["content"];
 	this.id = hash["id"];
 }
