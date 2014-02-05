@@ -18,26 +18,51 @@
 // 		fetch();
 // 		}, 3000);
 // });
+var App = function(){
+	this.fetch();
+}
 
+App.prototype.fetch = function(){
 
+		var pathName = window.location.pathname;
+
+		$.ajax({
+			url: "/games/" + pathName.split("/")[2], 
+			dataType: 'json', 
+			method: 'get',
+			success: function(data){
+			var game = new Game(data["game_id"], data["in_session"]);
+			var gameView = new GameView(game);
+			// gameView.render();
+
+			var playerView = new PlayerView();
+			var players = data["players"];
+			for (i in players){
+				var game_id = pathName.split("/")[2];
+				var score = players[i].score;
+				var name = players[i].name;
+				var player = new Player(game_id, score, name);
+				playerView.players.push(player);
+				};
+				console.log(playerView.players);
+				console.log(game);
+			}
+		});
+	}
 function Game(id, in_session){
-	var hash = this.add();
-	this.id = hash["id"];
-	this.in_session = hash["in_session"];
+	this.id = id;
+	this.in_session = in_session;
 }
 
 Game.prototype = {
-	add: function() {
-		// Make the AJAX call to create a new Game
-		// returns json data on success
-	},
 	joinGame: function(){
 		//ajax call to '/player/create'
 	}
 }
 
-function GameView(){
+function GameView(game){
 	// store the relevant dom elements as this.variables
+	this.setFetch();
 }
 
 GameView.prototype = {
@@ -51,10 +76,8 @@ GameView.prototype = {
 		// render whirlybird
 		// setFetch()
 	//})
-	}
-} 
+	},
 
-GameView.prototype = {
 	beginRound: function(){
 	// make ajax request to fill Round with data 
 	// render word << SHOULD THIS CALL A DIFFERENT FUNCTION TO RENDER THE WORD? A ROUND FUNCTION?
@@ -68,58 +91,69 @@ GameView.prototype = {
 	// this is called by on.click on joinButton
 	},
 
+	fetch: function(){
+		var pathName = window.location.pathname;
+
+		$.ajax({
+			url: "/games/" + pathName.split("/")[2], 
+			dataType: 'json', 
+			method: 'get',
+			success: function(data){
+			console.log(data);
+			}
+		})
+	},
+
+	setFetch: function(){
+		setInterval(this.fetch(), 1000);
+	}
+
 }
 
 function PlayerView(){
+	this.players = [];
 	// store the relevant dom elements as this.variables
 }
 
-PlayerView.prototype = {
-	fetch: function(){
-		$.ajax({
-		url: '/games/players', 
-		dataType: 'json', 
-		method: 'get',
-			success: function(data){
-				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
-				console.log(data[:players]);
-				} else {
-				console.log('waiting for the players to show up');
-				};
-			},
-			error: function(data){
-				console.log('error');
-			},
-		},
-	},
-	setFetch: function(){
-	setInterval(function() {
-		this.fetch();
-		}, 1000);
-	},
-	render: function(){
-	// renders table
-	},
-}
+// PlayerView.prototype = {
+// 	fetch: function(){
+// 		$.ajax({
+// 		url: '/games/players', 
+// 		dataType: 'json', 
+// 		method: 'get',
+// 			success: function(data){
+// 				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
+// 				console.log(data[:players]);
+// 				} else {
+// 				console.log('waiting for the players to show up');
+// 				};
+// 			},
+// 			error: function(data){
+// 				console.log('error');
+// 			},
+// 		},
+// 	},
+// 	setFetch: function(){
+// 	setInterval(function() {
+// 		this.fetch();
+// 		}, 1000);
+// 	},
+// 	render: function(){
+// 	// renders table
+// 	},
+// }
 
 
-function Player(){
-	var hash = this.add();
-	this.game = hash["game"];  // ***** ASK TOMORROW ******
-	this.score = hash["score"];
-	this.id = hash["id"];
+function Player(game_id, score, name){
+this.game_id = game_id;  //  ***** ASK TOMORROW ****** game v. game.id
+this.score = score;
+this.name = name;
 }
 
 Player.prototype = {
-	add: function() {
-		// Make the AJAX call to create a new Player
-		// returns json data on success
-	}
-}
-
-
-Player.prototype.render(){
+	render: function(){
 	// creates tr
+	}
 }
 
 function Round(){
@@ -214,7 +248,12 @@ DefinitionView.prototype = {
 
 // We don't have users and UserView
 
-
+$(function(){
+	var pathName = window.location.pathname;
+	if (pathName.split("/").length > 2 && pathName.split("/")[1] == "games"){
+		new App();
+	}
+});
 
 
 
