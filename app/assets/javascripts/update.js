@@ -1,42 +1,118 @@
+// var fetch = function(){
+// 	$.ajax({
+// 		url: '/games/ajax',
+// 		dataType: 'json',
+// 		method: 'get',
+
+// 		success: function(data){
+// 			console.log(data);
+// 		},
+// 		error: function(data){
+// 			console.log('error');
+// 		}
+// 	})
+// };
+
+// $(function(){
+// 	setInterval(function() {
+// 		fetch();
+// 		}, 3000);
+// });
+var App = function(){
+	this.fetch();
+}
+
+App.prototype.fetch = function(){
+
+		var pathName = window.location.pathname;
+
+		$.ajax({
+			url: "/games/" + pathName.split("/")[2],
+			dataType: 'json',
+			method: 'get',
+			success: function(data){
+			var game = new Game(data["game_id"], data["in_session"]);
+			var gameView = new GameView(game);
+			// gameView.render();
+
+			var playerView = new PlayerView();
+			var players = data["players"];
+			for (i in players){
+				var game_id = pathName.split("/")[2];
+				var score = players[i].score;
+				var name = players[i].name;
+				var player = new Player(game_id, score, name);
+				playerView.players.push(player);
+				};
+				console.log(playerView.players);
+				console.log(game);
+			}
+		});
+	}
 function Game(id, in_session){
-	this.id = hash["id"];
-	this.in_session = hash["in_session"];
-};
+	this.id = id;
+	this.in_session = in_session;
+}
 
-function GameView(){
-	//ajax call to listen for in_session
-};
+Game.prototype = {
+	joinGame: function(){
+		//ajax call to '/player/create'
+	}
+}
 
-GameView.prototype.initialize = function(){
-
-
-	$('<table>').append(table_row)
-	// call render from a PlayerView to create table to list players
-	// if current user created game
-		// startButton // on.click, beginRound()
-	// elsif current user is not a player at all
-		//  joinButton // on.click, push to database, renderWaiting()
+function GameView(game){
+	// store the relevant dom elements as this.variables
+	this.setFetch();
 }
 
 GameView.prototype = {
+	initialize: function() {
+	// PlayerView.render() to create table
+	// if user == game.players[0] << this won't work -- how do we get this logic to work?
+		// startGame Button // on('click'), beginRound()
+	// else
+	// display joinButton // on('click', function(){
+		// game.joinGame()
+		// render whirlybird
+		// setFetch()
+	//})
+	},
+
 	beginRound: function(){
 	// make ajax request to fill Round with data
+	// render word << SHOULD THIS CALL A DIFFERENT FUNCTION TO RENDER THE WORD? A ROUND FUNCTION?
 	},
 	finishRound: function(){
 	// render results
-	// render New Round Button (and listener)
+	// render newRoundButton // on('click') this.beginRound()
 	},
 	renderWaiting: function(){
 	// render whirlybird
-	// cal setFetch
 	// this is called by on.click on joinButton
 	},
+
+	fetch: function(){
+		var pathName = window.location.pathname;
+
+		$.ajax({
+			url: "/games/" + pathName.split("/")[2],
+			dataType: 'json',
+			method: 'get',
+			success: function(data){
+			console.log(data);
+			}
+		})
+	},
+
+	setFetch: function(){
+		setInterval(this.fetch(), 1000);
+	}
 
 }
 
 function PlayerView(){
-
-	// list all objects in DOM
+	this.players = [];
+	// store the relevant dom elements as this.variables
 }
 
 PlayerView.prototype = {
@@ -68,25 +144,21 @@ PlayerView.prototype = {
 		var table_score_cell = $('<td>').text(this.score);
 		table_row.append(table_name_cell).append(table_score_cell);
 		return table_row;
-	},
+	}
 }
 
 
-function Player(){
-	var hash = this.add();
-	this.game = hash["game"];  // ***** ASK TOMORROW ******
-	this.score = hash["score"];
-	this.name = hash["name"]; // ***** WE NEED TO PULL THIS FROM USER ******
-	this.id = hash["id"];
+function Player(game_id, score, name){
+this.game_id = game_id;  //  ***** ASK TOMORROW ****** game v. game.id
+this.score = score;
+this.name = name;
 }
 
 Player.prototype = {
 	render: function(){
-	// creates <tr>
-	// tr.html(this.name)
+	// creates tr
 	}
 }
-
 
 function Round(){
 	var hash = this.add();
@@ -97,10 +169,15 @@ function Round(){
 
 Round.prototype = {
 	add: function() {
-	// Make the AJAX call to create a new round
-	// returns json data on succeess
+		// Make the AJAX call to create a new round
+		// returns json data on success
 	},
+	submit: function(){
+		// ajax call to 'definition/create'
+		// put submission in database
+	}
 }
+
 
 function RoundView(round){
 	// store the relevant dom elements as this.variables
@@ -109,16 +186,18 @@ function RoundView(round){
 
 RoundView.prototype = {
 	renderWaiting: function(){
-	// render whirlybird
-	// this is called by on.click on submit.button
-	// call setFetch
+		// render whirlybird
+		// call setFetch()
 	},
 	renderInput: function(){
-	// appends input
-	// append submit button
+		// appends input
+		// append submitButton // on('click', function(){
+			//renderWaiting()
+			//Round.submit()
+		//})
 	},
 	fetch: function(){
-	//ajax listens to see if everyone has submitted
+		// ajax listens to see if everyone has submitted
 	},
 	setFetch: function(){
 	setInterval(function() {
@@ -137,23 +216,31 @@ function Definition(){
 Definition.prototype = {
 	render: function(){
 	// render li
-	// add event listeners
+	// on('click', this.pick())
 	},
+	pick: function(){
+	// ajax call to '/picks/create'
+	},
+	add: function(){
+	//	Make the AJAX call to create a new round
+	// returns json data on success
+	}
+
 }
 
 
 function DefinitionView(){
-
+	// store the relevant dom elements as this.variables
 }
 
 DefinitionView.prototype = {
 	setFetch: function(){
-	setInterval(function() {
-		this.fetch();
-		}, 1000);
+		setInterval(function() {
+			this.fetch();
+			}, 1000);
 	},
 	fetch: function(){
-	//ajax listens to see if everyone has submitted?
+	//ajax listens to see if everyone has submitted
 	},
 	render: function(){
 	// render ul
@@ -163,11 +250,14 @@ DefinitionView.prototype = {
 // We don't have a picks and picksView because we are
 // rendering them in results
 
-// We don't have users models
-// how do we know who the current user is?
+// We don't have users and UserView
 
-
-
+$(function(){
+	var pathName = window.location.pathname;
+	if (pathName.split("/").length > 2 && pathName.split("/")[1] == "games"){
+		new App();
+	}
+});
 
 
 

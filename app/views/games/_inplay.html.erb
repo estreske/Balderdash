@@ -87,7 +87,7 @@
 	</form>
 
 	<% elsif @game.rounds.count == 7 %>
-		<form action="<%= game_complete_path(@game) %>">
+		<form action="<%= game_win_path(@game) %>">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 		<button type="submit" id="submit">Complete Game</button>
 	</form>
