@@ -43,9 +43,9 @@ App.prototype.fetch = function(){
 				var name = players[i].name;
 				var player = new Player(game_id, score, name);
 				playerView.players.push(player);
-				};
-				console.log(playerView.players);
-				console.log(game);
+			};
+			console.log(playerView.players);
+			console.log(game);
 			}
 		});
 	}
@@ -95,7 +95,7 @@ GameView.prototype = {
 		var pathName = window.location.pathname;
 
 		$.ajax({
-			url: "/games/" + pathName.split("/")[2],
+			url: "/games/" + pathName.split("/")[2] + "/begin",
 			dataType: 'json',
 			method: 'get',
 			success: function(data){
@@ -117,21 +117,21 @@ function PlayerView(){
 
 PlayerView.prototype = {
 	fetch: function(){
-		$.ajax({
-		url: '/games/players',
-		dataType: 'json',
-		method: 'get',
-			success: function(data){
-				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS?
-				console.log(data[:players]);
-				} else {
-				console.log('waiting for the players to show up');
-				};
-			},
-			error: function(data){
-				console.log('error');
-			},
-		},
+	// 	$.ajax({
+	// 	url: '/games/players',
+	// 	dataType: 'json',
+	// 	method: 'get',
+	// 		success: function(data){
+	// 			if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS?
+	// 			console.log(data[:players]);
+	// 			} else {
+	// 			console.log('waiting for the players to show up');
+	// 			};
+	// 		},
+	// 		error: function(data){
+	// 			console.log('error');
+	// 		},
+	// 	},
 	},
 	setFetch: function(){
 	setInterval(function() {
