@@ -1,23 +1,26 @@
-<% if @game.in_session == false %>
-  <%= render "loading" %>
-<% else %>
- <%= render "inplay" %>
-<% end %>
+<div id="show">
+	<% if @game.in_session == false %>
+	  <%= render "loading" %>
+	<% else %>
+	 <%= render "inplay" %>
+	<% end %>
 
 
 <!-- Table of players -->
-<div>
-	<table>
-		<thead>
-			<tr>
-				<td>Player Name</td>
-				<td>Score</td>
-			</tr>
-		</thead>
-		<tbody>
-			<% @game.players.each do |player| %>
-				<tr><td><%= player.user.name %></td><td><%= player.score %></td></tr>
-			<% end %>
-		</tbody>
-	</table>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<td>Player Name</td>
+					<td>Score</td>
+				</tr>
+			</thead>
+			<tbody>
+				<% @game.players.each do |player| %>
+					<tr><td><%= player.user.name %></td><td><%= player.score %></td></tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 </div>
+
