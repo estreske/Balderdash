@@ -21,6 +21,7 @@
 
 
 function Game(id, in_session){
+	var hash = this.add();
 	this.id = hash["id"];
 	this.in_session = hash["in_session"];
 }
