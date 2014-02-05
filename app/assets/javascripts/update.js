@@ -42,24 +42,26 @@ function GameView(){
 
 GameView.prototype = {
 	initialize: function() {
-	// display Join // on('click', function(){
-		// game.joinGame
+	// PlayerView.render() to create table
+	// if user == game.players[0] << this won't work -- how do we get this logic to work?
+		// startGame Button // on('click'), beginRound()
+	// else 
+	// display joinButton // on('click', function(){
+		// game.joinGame()
 		// render whirlybird
 		// setFetch()
 	//})
-	// startGame Button // on('click'), beginRound()
-	// PlayerView.render() to create table
 	}
 } 
 
 GameView.prototype = {
 	beginRound: function(){
 	// make ajax request to fill Round with data 
-	// render Word << SHOULD THIS CALL A DIFFERENT FUNCTION TO RENDER THE WORD? A ROUND FUNCTION?
+	// render word << SHOULD THIS CALL A DIFFERENT FUNCTION TO RENDER THE WORD? A ROUND FUNCTION?
 	},
 	finishRound: function(){
 	// render results
-	// render newRoundButton // on('click')
+	// render newRoundButton // on('click') this.beginRound()
 	},
 	renderWaiting: function(){
 	// render whirlybird
