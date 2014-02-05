@@ -30,6 +30,9 @@ Game.prototype = {
 	add: function() {
 		// Make the AJAX call to create a new Game
 		// returns json data on success
+	},
+	joinGame: function(){
+		//ajax call to '/player/create'
 	}
 }
 
@@ -39,8 +42,12 @@ function GameView(){
 
 GameView.prototype = {
 	initialize: function() {
-	// display Join // on('click'), render whirleybird, setFetch()
-	// Start Button // on('click'), beginRound()
+	// display Join // on('click', function(){
+		// game.joinGame
+		// render whirlybird
+		// setFetch()
+	//})
+	// startGame Button // on('click'), beginRound()
 	// PlayerView.render() to create table
 	}
 } 
@@ -124,6 +131,10 @@ Round.prototype = {
 	add: function() {
 		// Make the AJAX call to create a new round
 		// returns json data on success
+	},
+	submit: function(){
+		// ajax call to 'definition/create'
+		// put submission in database
 	}
 }
 
@@ -142,7 +153,7 @@ RoundView.prototype = {
 	// appends input 
 	// append submitButton // on('click', function(){
 		//renderWaiting()
-		//Definition.submit()
+		//Round.submit()
 	//})
 	},
 	fetch: function(){
@@ -169,9 +180,6 @@ Definition.prototype = {
 	},
 	pick: function(){
 	// ajax call to '/picks/create'
-	},
-	submit: function(){
-	// ajax call to '/definition/create'
 	},
 	add: function(){
 	//	Make the AJAX call to create a new round
