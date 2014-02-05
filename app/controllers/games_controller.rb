@@ -72,7 +72,7 @@ before_filter :authenticate_user!
 		respond_to do |format|
 			format.json do
 				if game.players.count != params[:player_count]
-					render :json => {status: 'more_players', data: game.players}.to_json
+					render :json => {status: 'more_players', player: game.players}.to_json
 				else
 					render :json => {status: 'waiting'}.to_json
 				end

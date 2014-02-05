@@ -35,50 +35,55 @@ GameView.prototype.initialize() {
 	// call render from a PlayerView to create ul
 }
 
-GameView.prototype.beginRound = function(){
+GameView.prototype = {
+	beginRound: function(){
 	// make ajax request to fill Round with data 
-}
-
-GameView.prototype.finishRound = function(){
+	},
+	finishRound = function(){
 	// render results
 	// render New Round Button (and listener)
-}
-
-GameView.prototype.renderWaiting = function(){
+	},
+	renderWaiting = function(){
 	// render whirlybird
 	// this is called by on.click on join.button
+	},
+
 }
 
 function PlayerView(){
 }
 
-PlayerView.prototype.fetch = function(){
-	$.ajax({
-	url: '/games/players', 
-	dataType: 'json', 
-	method: 'get',
-
-	success: function(data){
-		console.log(data);
+PlayerView.prototype = {
+	fetch = function(){
+		$.ajax({
+		url: '/games/players', 
+		dataType: 'json', 
+		method: 'get',
+			success: function(data){
+				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
+				console.log(data[:players]);
+				} else {
+				console.log('waiting for the players to show up');
+				};
+			},
+			error: function(data){
+				console.log('error');
+			},
+		},
 	},
-	error: function(data){
-		console.log('error');
-	}
-});
-}
-
-PlayerView.prototype.setFetch = function(){
+	setFetch = function(){
 	setInterval(function() {
 		this.fetch();
 		}, 1000);
+	},
+	render = function(){
+	// renders table
+	},
 }
 
-PlayerView.prototype.render = function(){
-	// renders table
-}
 
 function Player(){
-	var hash = this.add()
+	var hash = this.add();
 	this.game = hash["game"];  // ***** ASK TOMORROW ******
 	this.score = hash["score"];
 	this.id = hash["id"];
@@ -89,7 +94,7 @@ Player.prototype.render(){
 }
 
 function Round(){
-	var hash = this.add()
+	var hash = this.add();
 	this.game = hash["game"];  // ***** ASK TOMORROW ******
 	this.word = hash["word"];
 	this.id = hash["id"];
@@ -105,25 +110,24 @@ function RoundView(round){
 	// this.wordElement = $("<div>").text(round.word);
 }
 
-RoundView.prototype.renderWaiting = function(){
+RoundView.prototype = {
+	renderWaiting: function(){
 	// render whirlybird
 	// this is called by on.click on submit.button
 	// starts setter
-}
-
-RoundView.prototype.renderInput = function(){
+	},
+	renderInput: function(){
 	// appends input 
 	// append submit button
-}
-
-RoundView.prototype.fetch = function(){
-	//ajax listesn to see if everyone has submitted?
-}
-
-RoundView.prototype.setFetch = function(){
+	},
+	fetch: function(){
+	//ajax listens to see if everyone has submitted
+	},
+	setFetch: function(){
 	setInterval(function() {
 		this.fetch();
 		}, 1000);
+	},
 }
 
 function Definition(){
@@ -133,27 +137,30 @@ function Definition(){
 	this.id = hash["id"];
 }
 
-Definition.prototype.render = function(){
+Definition.prototype = {
+	render: function(){
 	// render li
 	// add event listeners
+	},
 }
+
 
 function DefinitionView(){
 
 }
 
-DefinitionView.prototype.setFetch = function(){
+DefinitionView.prototype = {
+	setFetch: function(){
 	setInterval(function() {
 		this.fetch();
 		}, 1000);
-}
-
-DefinitionView.prototype.fetch = function(){
+	},
+	fetch: function(){
 	//ajax listesn to see if everyone has submitted?
-}
-
-DefinitionView.prototype.render = function(){
+	},
+	render: function(){
 	// render ul
+	},
 }
 
 // We don't have a picks and picksView because we are

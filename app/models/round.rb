@@ -20,7 +20,7 @@ class Round < ActiveRecord::Base
   end
 
   def all_picked?
-    if round.picks.count = round.players.count
+    if self.picks.count == self.game.players.count
       return true
     else
       return false
@@ -28,7 +28,7 @@ class Round < ActiveRecord::Base
   end
 
   def all_submitted?
-    if round.definitions.count = round.players.count + 1
+    if self.definitions.count == ( self.game.players.count + 1 )
       return true
     else
       return false
