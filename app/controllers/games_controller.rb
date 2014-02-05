@@ -98,6 +98,9 @@ before_filter :authenticate_user!
 		@winners = []
 		@players.each do |player|
 			if player.score == @players.first.score
+				winner = player.user
+				winner.win_count +=1
+				winner.save!
 				@winners << player
 			end
 		end

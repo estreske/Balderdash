@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140203220744) do
+ActiveRecord::Schema.define(:version => 20140204230846) do
 
   create_table "definitions", :force => true do |t|
     t.string   "content"
@@ -25,6 +25,31 @@ ActiveRecord::Schema.define(:version => 20140203220744) do
     t.boolean  "in_session"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "mad_chatter_messages", :force => true do |t|
+    t.string   "text"
+    t.string   "html"
+    t.integer  "room_id"
+    t.integer  "author_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "mad_chatter_rooms", :force => true do |t|
+    t.string   "name"
+    t.integer  "owner_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "mad_chatter_users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "encrypted_password"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "picks", :force => true do |t|
@@ -62,8 +87,8 @@ ActiveRecord::Schema.define(:version => 20140203220744) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "win_count"
-    t.string   "name"
+    t.integer  "win_count",              :default => 0
+    t.string   "name",                   :default => "", :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
