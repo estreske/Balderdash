@@ -7,19 +7,20 @@ function GameView(){
 	//ajax call to listen for in_session
 };
 
-GameView.prototype = {
-	initialize: function(){
+GameView.prototype.initialize = function(){
+
+
+	$('<table>').append(table_row)
 	// call render from a PlayerView to create table to list players
 	// if current user created game
 		// startButton // on.click, beginRound()
 	// elsif current user is not a player at all
 		//  joinButton // on.click, push to database, renderWaiting()
-	}
 }
 
 GameView.prototype = {
 	beginRound: function(){
-	// make ajax request to fill Round with data 
+	// make ajax request to fill Round with data
 	},
 	finishRound: function(){
 	// render results
@@ -34,14 +35,15 @@ GameView.prototype = {
 }
 
 function PlayerView(){
+
 	// list all objects in DOM
 }
 
 PlayerView.prototype = {
 	fetch: function(){
 		$.ajax({
-		url: '/games/players', 
-		dataType: 'json', 
+		url: '/games/players',
+		dataType: 'json',
 		method: 'get',
 			success: function(data){
 				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS?
@@ -61,7 +63,11 @@ PlayerView.prototype = {
 		}, 1000);
 	},
 	render: function(){
-	// renders table
+		var table_row = $('<tr>');
+		var table_name_cell = $('<td>').text(this.name);
+		var table_score_cell = $('<td>').text(this.score);
+		table_row.append(table_name_cell).append(table_score_cell);
+		return table_row;
 	},
 }
 
@@ -108,7 +114,7 @@ RoundView.prototype = {
 	// call setFetch
 	},
 	renderInput: function(){
-	// appends input 
+	// appends input
 	// append submit button
 	},
 	fetch: function(){
@@ -155,7 +161,7 @@ DefinitionView.prototype = {
 }
 
 // We don't have a picks and picksView because we are
-// rendering them in results 
+// rendering them in results
 
 // We don't have users models
 // how do we know who the current user is?
