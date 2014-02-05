@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script> 
+    var user = <%= current_user.to_json(only: [:name, :id]).html_safe %>
+  </script>
   <link rel="shortcut icon" href="/favicon.ico/"/>
   <title>Balderdash</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>

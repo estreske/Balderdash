@@ -146,18 +146,18 @@ function RoundView(round){
 
 RoundView.prototype = {
 	renderWaiting: function(){
-	// render whirlybird
-	// call setFetch()
+		// render whirlybird
+		// call setFetch()
 	},
 	renderInput: function(){
-	// appends input 
-	// append submitButton // on('click', function(){
-		//renderWaiting()
-		//Round.submit()
-	//})
+		// appends input 
+		// append submitButton // on('click', function(){
+			//renderWaiting()
+			//Round.submit()
+		//})
 	},
 	fetch: function(){
-	// ajax listens to see if everyone has submitted
+		// ajax listens to see if everyone has submitted
 	},
 	setFetch: function(){
 	setInterval(function() {
@@ -209,6 +209,8 @@ DefinitionView.prototype = {
 
 // We don't have a picks and picksView because we are
 // rendering them in results 
+
+// We don't have users and UserView
 
 
 
