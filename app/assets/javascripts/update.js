@@ -21,8 +21,8 @@
 
 
 function Game(id, in_session){
-	this.id = id;
-	this.in_session = in_session;
+	this.id = hash["id"];
+	this.in_session = hash["in_session"];
 }
 
 function GameView(){
@@ -53,11 +53,24 @@ function PlayerView(){
 }
 
 PlayerView.prototype.fetch = function(){
-	// ajax call to listen for new players
+	$.ajax({
+	url: '/games/players', 
+	dataType: 'json', 
+	method: 'get',
+
+	success: function(data){
+		console.log(data);
+	},
+	error: function(data){
+		console.log('error');
+	}
+});
 }
 
 PlayerView.prototype.setFetch = function(){
-	// sets interval
+	setInterval(function() {
+		this.fetch();
+		}, 1000);
 }
 
 PlayerView.prototype.render = function(){
@@ -108,7 +121,9 @@ RoundView.prototype.fetch = function(){
 }
 
 RoundView.prototype.setFetch = function(){
-	// interval for listener
+	setInterval(function() {
+		this.fetch();
+		}, 1000);
 }
 
 function Definition(){
@@ -128,7 +143,9 @@ function DefinitionView(){
 }
 
 DefinitionView.prototype.setFetch = function(){
-	// interval for listener
+	setInterval(function() {
+		this.fetch();
+		}, 1000);
 }
 
 DefinitionView.prototype.fetch = function(){

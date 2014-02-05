@@ -19,4 +19,20 @@ class Round < ActiveRecord::Base
     end
   end
 
+  def all_picked?
+    if round.picks.count = round.players.count
+      return true
+    else
+      return false
+    end
+  end
+
+  def all_submitted?
+    if round.definitions.count = round.players.count + 1
+      return true
+    else
+      return false
+    end
+  end
+
 end
