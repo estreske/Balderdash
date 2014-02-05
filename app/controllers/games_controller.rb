@@ -43,4 +43,18 @@ before_filter :authenticate_user!
 		end
 	end
 
+	def ajax 
+		respond_to do |format|
+			format.json do
+				num = rand(0..100)
+				if num > 50
+					round = Round.first
+					render :json => {status: 'changed', data: 'i am a person that is my def'}.to_json
+				else
+					render :json => {status: 'incomplete'}.to_json
+				end
+			end
+		end
+	end
+
 end

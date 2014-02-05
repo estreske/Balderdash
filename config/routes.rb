@@ -11,6 +11,14 @@ Balderdash::Application.routes.draw do
 
   get '/games/:id/complete' => "games#complete", as: "game_complete"
 
+  get '/games/ajax' => 'games#ajax'
+
+  get '/games/picks' => 'games#picks'
+
+  get '/games/definitions' => 'games#definitions'
+
+  get '/games/players' => 'games#players'
+
   resources :games, :except => [:edit, :update, :new]
   resources :players, :only => [:create, :destroy, :update]
   resources :picks, :only => [:create, :destroy]
