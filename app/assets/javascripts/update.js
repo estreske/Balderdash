@@ -26,36 +26,47 @@ function Game(id, in_session){
 	this.in_session = hash["in_session"];
 }
 
-function GameView(){
-	//ajax call to listen for in_session
+Game.prototype = {
+	add: function() {
+		// Make the AJAX call to create a new Game
+		// returns json data on success
+	}
 }
 
-GameView.prototype.initialize() {
-	// display Join // on click, make ajax, render whirleybird
-	// Start Button // on click, make ajax to change game to insession and create round with word
-	// call render from a PlayerView to create ul
+function GameView(){
+	// store the relevant dom elements as this.variables
 }
+
+GameView.prototype = {
+	initialize: function() {
+	// display Join // on('click'), render whirleybird, setFetch()
+	// Start Button // on('click'), beginRound()
+	// PlayerView.render() to create table
+	}
+} 
 
 GameView.prototype = {
 	beginRound: function(){
 	// make ajax request to fill Round with data 
+	// render Word << SHOULD THIS CALL A DIFFERENT FUNCTION TO RENDER THE WORD? A ROUND FUNCTION?
 	},
-	finishRound = function(){
+	finishRound: function(){
 	// render results
-	// render New Round Button (and listener)
+	// render newRoundButton // on('click')
 	},
-	renderWaiting = function(){
+	renderWaiting: function(){
 	// render whirlybird
-	// this is called by on.click on join.button
+	// this is called by on.click on joinButton
 	},
 
 }
 
 function PlayerView(){
+	// store the relevant dom elements as this.variables
 }
 
 PlayerView.prototype = {
-	fetch = function(){
+	fetch: function(){
 		$.ajax({
 		url: '/games/players', 
 		dataType: 'json', 
@@ -72,12 +83,12 @@ PlayerView.prototype = {
 			},
 		},
 	},
-	setFetch = function(){
+	setFetch: function(){
 	setInterval(function() {
 		this.fetch();
 		}, 1000);
 	},
-	render = function(){
+	render: function(){
 	// renders table
 	},
 }
@@ -90,6 +101,14 @@ function Player(){
 	this.id = hash["id"];
 }
 
+Player.prototype = {
+	add: function() {
+		// Make the AJAX call to create a new Player
+		// returns json data on success
+	}
+}
+
+
 Player.prototype.render(){
 	// creates tr
 }
@@ -101,10 +120,13 @@ function Round(){
 	this.id = hash["id"];
 }
 
-Round.prototype.add = function() {
-	// Make the AJAX call to create a new round
-	// returns json data on succeess
+Round.prototype = {
+	add: function() {
+		// Make the AJAX call to create a new round
+		// returns json data on success
+	}
 }
+
 
 function RoundView(round){
 	// store the relevant dom elements as this.variables
@@ -114,15 +136,17 @@ function RoundView(round){
 RoundView.prototype = {
 	renderWaiting: function(){
 	// render whirlybird
-	// this is called by on.click on submit.button
-	// starts setter
+	// call setFetch()
 	},
 	renderInput: function(){
 	// appends input 
-	// append submit button
+	// append submitButton // on('click', function(){
+		//renderWaiting()
+		//Definition.submit()
+	//})
 	},
 	fetch: function(){
-	//ajax listens to see if everyone has submitted
+	// ajax listens to see if everyone has submitted
 	},
 	setFetch: function(){
 	setInterval(function() {
@@ -141,23 +165,34 @@ function Definition(){
 Definition.prototype = {
 	render: function(){
 	// render li
-	// add event listeners
+	// on('click', this.pick())
 	},
+	pick: function(){
+	// ajax call to '/picks/create'
+	},
+	submit: function(){
+	// ajax call to '/definition/create'
+	},
+	add: function(){
+	//	Make the AJAX call to create a new round
+	// returns json data on success
+	}
+
 }
 
 
 function DefinitionView(){
-
+	// store the relevant dom elements as this.variables
 }
 
 DefinitionView.prototype = {
 	setFetch: function(){
-	setInterval(function() {
-		this.fetch();
-		}, 1000);
+		setInterval(function() {
+			this.fetch();
+			}, 1000);
 	},
 	fetch: function(){
-	//ajax listesn to see if everyone has submitted?
+	//ajax listens to see if everyone has submitted
 	},
 	render: function(){
 	// render ul
