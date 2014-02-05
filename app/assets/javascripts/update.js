@@ -1,66 +1,50 @@
-// var fetch = function(){
-// 	$.ajax({
-// 		url: '/games/ajax', 
-// 		dataType: 'json', 
-// 		method: 'get',
-
-// 		success: function(data){
-// 			console.log(data);
-// 		},
-// 		error: function(data){
-// 			console.log('error');
-// 		}
-// 	})
-// };
-
-// $(function(){
-// 	setInterval(function() {
-// 		fetch();
-// 		}, 3000);
-// });
-
-
 function Game(id, in_session){
 	this.id = hash["id"];
 	this.in_session = hash["in_session"];
-}
+};
 
 function GameView(){
 	//ajax call to listen for in_session
-}
+};
 
-GameView.prototype.initialize() {
-	// display Join // on click, make ajax, render whirleybird
-	// Start Button // on click, make ajax to change game to insession and create round with word
-	// call render from a PlayerView to create ul
+GameView.prototype = {
+	initialize: function(){
+	// call render from a PlayerView to create table to list players
+	// if current user created game
+		// startButton // on.click, beginRound()
+	// elsif current user is not a player at all
+		//  joinButton // on.click, push to database, renderWaiting()
+	}
 }
 
 GameView.prototype = {
 	beginRound: function(){
 	// make ajax request to fill Round with data 
 	},
-	finishRound = function(){
+	finishRound: function(){
 	// render results
 	// render New Round Button (and listener)
 	},
-	renderWaiting = function(){
+	renderWaiting: function(){
 	// render whirlybird
-	// this is called by on.click on join.button
+	// cal setFetch
+	// this is called by on.click on joinButton
 	},
 
 }
 
 function PlayerView(){
+	// list all objects in DOM
 }
 
 PlayerView.prototype = {
-	fetch = function(){
+	fetch: function(){
 		$.ajax({
 		url: '/games/players', 
 		dataType: 'json', 
 		method: 'get',
 			success: function(data){
-				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
+				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS?
 				console.log(data[:players]);
 				} else {
 				console.log('waiting for the players to show up');
@@ -71,12 +55,12 @@ PlayerView.prototype = {
 			},
 		},
 	},
-	setFetch = function(){
+	setFetch: function(){
 	setInterval(function() {
 		this.fetch();
 		}, 1000);
 	},
-	render = function(){
+	render: function(){
 	// renders table
 	},
 }
@@ -86,12 +70,17 @@ function Player(){
 	var hash = this.add();
 	this.game = hash["game"];  // ***** ASK TOMORROW ******
 	this.score = hash["score"];
+	this.name = hash["name"]; // ***** WE NEED TO PULL THIS FROM USER ******
 	this.id = hash["id"];
 }
 
-Player.prototype.render(){
-	// creates tr
+Player.prototype = {
+	render: function(){
+	// creates <tr>
+	// tr.html(this.name)
+	}
 }
+
 
 function Round(){
 	var hash = this.add();
@@ -100,9 +89,11 @@ function Round(){
 	this.id = hash["id"];
 }
 
-Round.prototype.add = function() {
+Round.prototype = {
+	add: function() {
 	// Make the AJAX call to create a new round
 	// returns json data on succeess
+	},
 }
 
 function RoundView(round){
@@ -114,7 +105,7 @@ RoundView.prototype = {
 	renderWaiting: function(){
 	// render whirlybird
 	// this is called by on.click on submit.button
-	// starts setter
+	// call setFetch
 	},
 	renderInput: function(){
 	// appends input 
@@ -156,7 +147,7 @@ DefinitionView.prototype = {
 		}, 1000);
 	},
 	fetch: function(){
-	//ajax listesn to see if everyone has submitted?
+	//ajax listens to see if everyone has submitted?
 	},
 	render: function(){
 	// render ul
@@ -165,6 +156,9 @@ DefinitionView.prototype = {
 
 // We don't have a picks and picksView because we are
 // rendering them in results 
+
+// We don't have users models
+// how do we know who the current user is?
 
 
 
