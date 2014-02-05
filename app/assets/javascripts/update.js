@@ -115,33 +115,37 @@ function PlayerView(){
 	// store the relevant dom elements as this.variables
 }
 
-// PlayerView.prototype = {
-// 	fetch: function(){
-// 		$.ajax({
-// 		url: '/games/players', 
-// 		dataType: 'json', 
-// 		method: 'get',
-// 			success: function(data){
-// 				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
-// 				console.log(data[:players]);
-// 				} else {
-// 				console.log('waiting for the players to show up');
-// 				};
-// 			},
-// 			error: function(data){
-// 				console.log('error');
-// 			},
-// 		},
-// 	},
-// 	setFetch: function(){
-// 	setInterval(function() {
-// 		this.fetch();
-// 		}, 1000);
-// 	},
-// 	render: function(){
-// 	// renders table
-// 	},
-// }
+PlayerView.prototype = {
+	fetch: function(){
+		$.ajax({
+		url: '/games/players', 
+		dataType: 'json', 
+		method: 'get',
+			success: function(data){
+				if ( data[:status] === 'more_players' ) { // IS THIS HOW TO DO THIS? 
+				console.log(data[:players]);
+				} else {
+				console.log('waiting for the players to show up');
+				};
+			},
+			error: function(data){
+				console.log('error');
+			},
+		},
+	},
+	setFetch: function(){
+	setInterval(function() {
+		this.fetch();
+		}, 1000);
+	},
+	render: function(){
+		var table_row = $('<tr>');
+		var table_name_cell = $('<td>').text(this.name);
+		var table_score_cell = $('<td>').text(this.score);
+		table_row.append(table_name_cell).append(table_score_cell);
+		return table_row;
+	}
+}
 
 
 function Player(game_id, score, name){
