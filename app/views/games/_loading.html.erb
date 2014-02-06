@@ -6,7 +6,7 @@
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
     <button type="submit" id="start_game">Start Game</button>
   </form>
-
+  
 <!-- the current has joined this game --> 
 
 <% elsif @game.users.include?(current_user) %>

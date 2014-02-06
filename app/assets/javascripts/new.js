@@ -11,69 +11,18 @@ App.prototype.fetch = function(){
     dataType: 'json',
     method: 'get',
     success: function(data){
-        //var game = new Game(data["game_id"], data["in_session"]);
-        //var gameView = new GameView(game);
-        // gameView.render();
-
-        playerView = new PlayerView();
-        // var players = data["players"];
-        // for (i in players){
-        //   var game_id = pathName.split("/")[2];
-        //   var player_id = i;
-        //   var score = players[i].score;
-        //   var name = players[i].name;
-        //   var player = new Player(game_id, score, name, player_id);
-        //   playerView.players.push(player);
-        // };
-        // console.log(playerView.players);
-        // console.log(game);
-      }
-    });
+      playerView = new PlayerView();
+        
+    }
+  });
 }
 
-
-// function Game(id, in_session){
-//   this.id = id;
-//   this.in_session = in_session;
-// }
-
-// Game.prototype = {
-//   joinGame: function(){
-//   //ajax call to '/player/create'
-//   }
-// }
-
 function GameView(game){
-  // store the relevant dom elements as this.variables
   this.setSync();
 }
 
 GameView.prototype = {
-  // beginRound: function(){
-  //   $.ajax({
-  //     url: "/games/" + pathName.split("/")[2] + "/round",
-  //     dataType: 'json',
-  //     method: 'get',
-  //     success: function(data){
-  //       var game_id = data["game_id"];
-  //       var word = data["word"];
-  //       var round_id = data["round_id"];
-  //       var round = new Round(game_id, word, round_id);
-  //       var view = new RoundView(round)
-  //     }
-  //   })
-  // },
-
-  // finishRound: function(){
-  //   // render results
-  //   // render newRoundButton // on('click') this.beginRound()
-  // },
-
-  // renderWaiting: function(){
-
-  //   $('<i>').addClass("fa fa-refresh fa-spin fa-5x").append('body');//future change body to div class name
-  //     this.setFetch();
-  // },
+  
   sync: function(){
     var pathName = window.location.pathname;
     var self = this;
@@ -83,7 +32,6 @@ GameView.prototype = {
       dataType: 'json',
       method: 'get',
       success: function(data){
-        console.log(data);
         if (data.status === 'in_session'){
           clearInterval(self.interval); 
           clearInterval(PlayerView.interval);
@@ -92,10 +40,10 @@ GameView.prototype = {
       }
     })
   },
+
   setSync: function(){
     var self = this;
     this.interval = setInterval(function(){self.sync()},1000);
-    
   }
 };
 
@@ -103,10 +51,10 @@ function PlayerView(){
   this.players = [];
   this.tbody = $('#players tbody');
   this.setSync();
-  // store the relevant dom elements as this.variables
 }
 
 PlayerView.prototype = {
+
   sync: function(){
     var pathName = window.location.pathname;
     var self = this;
@@ -118,6 +66,7 @@ PlayerView.prototype = {
       success: function(data){
           self.players = [];
           var players = data["players"];
+
           for (i in players){
             var game_id = pathName.split("/")[2];
             var player_id = i;
@@ -126,24 +75,24 @@ PlayerView.prototype = {
             var player = new Player(game_id, score, name, player_id);
             self.players.push(player);
             self.render();
-            }
+          }
       }
     })
   },
+
   setSync: function(){
     var self = this;
     this.interval = setInterval(function(){self.sync()},1000);
   },
+
   render: function(){
     var self = this;
-    console.log(self);
     $(this.tbody).empty();
     $(this.players).each(function(index, player) {
       $(self.tbody).append(player.render());
     });
   }
 }
-
 
 function Player(game_id, score, name, player_id){
   this.game_id = game_id; 
@@ -153,6 +102,7 @@ function Player(game_id, score, name, player_id){
 }
 
 Player.prototype = {
+
   render: function(){
     var table_row = $('<tr>');
     var table_name_cell = $('<td>').text(this.name);
@@ -162,44 +112,12 @@ Player.prototype = {
   }
 }
 
-// function Round(game_id, word, round_id){
-//   this.game_id = game_id;  
-//   this.word = word;
-//   this.round_id = round_id;
-// }
-
-// Round.prototype = {
-//   submit: function(){
-//   // ajax call to 'definition/create'
-//   // put submission in database
-//   }
-// }
-
-
 function RoundView(){
-  // store the relevant dom elements as this.variables
-  // this.wordElement = $("<div>").text(round.word);
   this.setSync();
 }
 
 RoundView.prototype = {
-  // renderWaiting: function(){
-  //   $('<i>').addClass("fa fa-refresh fa-spin fa-5x").append('body');//future change body to div class name
-  //     this.setFetch();
-  // },
   
-  // renderInput: function(){
-  //   var self = this;
-  //   var word_container = $('div').addClass('word-container').text(this.round.word);
-  //   var def_field = $('<textarea>');
-  //   var def_submit_btn = $('<button>').addClass('btn btn-primary');
-  //   var def_input_container = $('<div>').addClass('def-input-container').append(def_field).append(def_submit_btn)
-  //   $('body').append(word_container);
-  //   def_submit_btn.on('click', function(){
-  //     self.renderWaiting();
-  //     self.round.submit();
-  //   });
-  // },
   sync: function(){
     var pathName = window.location.pathname;
     var self = this;
@@ -215,6 +133,7 @@ RoundView.prototype = {
       }
     })
   },
+
   setSync: function(){
     var self = this;
     this.interval = setInterval(function(){self.sync()},1000);
@@ -222,56 +141,17 @@ RoundView.prototype = {
   },
 };
 
-// function Definition(round_id, content, id){
-//   this.round_id = round_id; 
-//   this.content = content;
-//   this.id = id;
-// }
-
-// Definition.prototype = {
-//   // render: function(){
-//   //     var def_content = $('<li>').text(this.content);
-//   //     def_content.on('click', function(){
-//   //       this.pick();
-//   //     });
-//   //   // render li
-//   //   return def_content;
-//   //   // render li
-//   //   // on('click', this.pick())
-//   // },
-
-//   pick: function(){
-//     // ajax call to '/picks/create'
-//   },
-
-//   add: function(){
-//     // Make the AJAX call to create a new round
-//     // returns json data on success
-//   }
-
-// }
-
-
 function DefinitionView(){
-  // store the relevant dom elements as this.variables
   this.setSync();
 }
 
 DefinitionView.prototype = {
+
   setSync: function(){
     var self = this;
     this.interval = setInterval(function(){self.sync()},1000);
   },
-  // fetch: function(){  
-
-  // },
-  // render: function(){
-  //   var def_container = $('<ul>').addClass('def-container');
-  //   $(this.definitions).each(function(index, definition) {
-  //     def_container.append(definition.render());
-  //   });
-  // // render ul
-  // },
+  
   sync: function(){
     var self = this;
     var pathName = window.location.pathname;
@@ -287,10 +167,6 @@ DefinitionView.prototype = {
       }
     })
   },
-
-  // submitDefinition: function(){
-  //   // takes user input and creates an entry in the database
-  // }
 };
 
 function Room(game_id, name){
@@ -299,30 +175,30 @@ function Room(game_id, name){
 }
 
 Room.prototype = {
+
   render: function(){
     var $newli = $('<li>');
     $newli.html("<a href='/games/"+ this.game_id +"'>" + this.name + "'s Game Room</a>");
     return $newli;
   }
-}
+};
 
 function RoomView(){
   var rooms = []
   this.$roomlist = $('ul#roomView');
-  console.log(this.$roomlist);
   this.setSync();
-  console.log('room view made')
 }
 
 RoomView.prototype = {
+
   render: function(){
     var self = this;
    self.$roomlist.empty();
     $(this.rooms).each(function(index, room) {
       self.$roomlist.append(room.render());
     });
-    
   },
+
   sync: function(){
     var self = this;
     $.ajax({
@@ -330,7 +206,6 @@ RoomView.prototype = {
       dataType: 'json',
       method: 'get',
       success: function(data){
-          console.log(data)
           self.rooms = [];
           var rooms = data["games"];
           for (i in rooms){
@@ -338,39 +213,33 @@ RoomView.prototype = {
             var name = rooms[i];
             var room = new Room(game_id, name);
             self.rooms.push(room);
-            console.log(room);
             self.render(); 
-            }
+          }
       }
     })
   },
+
   setSync: function(){
     var self = this;
     this.interval = setInterval(function(){self.sync()},1000);
-  },
-}
+  }
+};
 
-
-
-
-  $(function(){
-    var pathName = window.location.pathname;
-    if (pathName.split("/").length > 3 && pathName.split("/")[1] == "games"){
-      var app = new App();
-      if ($('#whirlybird1').length == 1){
-        console.log('i got it!')
-        var gameView = new GameView();
-      }
-      else if  ($('#whirlybird2').length == 1) {
-        console.log('later')
-        var roundView = new RoundView();
-      }
-      else if ($('#whirlybird3').length == 1){
-        console.log('last')
-        var definitionView = new DefinitionView();
-      }
-    } else if ( pathName.split("/").length <= 3 && pathName.split("/")[1] == "games"){
-      new RoomView();
+$(function(){
+  var pathName = window.location.pathname;
+  if (pathName.split("/").length > 3 && pathName.split("/")[1] == "games"){
+    var app = new App();
+    if ($('#whirlybird1').length == 1){
+      new GameView();
     }
-
-  });
+    else if  ($('#whirlybird2').length == 1) {
+      new RoundView();
+    }
+    else if ($('#whirlybird3').length == 1){
+      new DefinitionView();
+    }
+  }
+  else if ( pathName.split("/").length <= 3 && pathName.split("/")[1] == "games"){
+    new RoomView();
+  }
+});

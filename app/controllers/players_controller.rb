@@ -9,14 +9,14 @@ class PlayersController < ApplicationController
  			})
  		redirect_to game_path(game)
  	end
- #  player PUT    /players/:id(.:format)         players#update
+
+  #  player PUT    /players/:id(.:format)         players#update
  	def update
  		
  	end
- #         DELETE /players/:id(.:format)         players#destroy
+
+  #         DELETE /players/:id(.:format)         players#destroy
  	def destroy
 
  	end
-
-
 end

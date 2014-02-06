@@ -1,8 +1,9 @@
 Balderdash::Application.routes.draw do
+
   devise_for :users
 
   authenticated :user do
-  root :to => "games#index"
+    root :to => "games#index"
   end
 
   root :to => "home#index"
@@ -26,8 +27,13 @@ Balderdash::Application.routes.draw do
   get '/rounds/:id/complete' => 'rounds#complete'
 
   resources :games, :except => [:edit, :update, :new]
+
   resources :players, :only => [:create, :destroy, :update]
+
   resources :picks, :only => [:create, :destroy]
+
   resources :definitions, :only => [:create]
+
   resources :rounds, :only => [:create]
+  
 end

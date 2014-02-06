@@ -1,4 +1,5 @@
 class Game < ActiveRecord::Base
+  
   attr_accessible :in_session
 
   has_many :players
@@ -31,5 +32,4 @@ class Game < ActiveRecord::Base
     end
     return games
   end
-
 end

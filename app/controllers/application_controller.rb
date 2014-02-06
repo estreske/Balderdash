@@ -5,5 +5,4 @@ class ApplicationController < ActionController::Base
     "/games" # <- Path you want to redirect the user to.
   end
 
-
 end
