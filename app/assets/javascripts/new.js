@@ -369,7 +369,7 @@ RoomView.prototype = {
         console.log('last')
         var definitionView = new DefinitionView();
       }
-    } else if ( pathName.split("/").length == 2 && pathName.split("/")[1] == "games"){
+    } else if ( pathName.split("/").length <= 3 && pathName.split("/")[1] == "games"){
       new RoomView();
     }
 
