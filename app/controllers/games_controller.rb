@@ -31,6 +31,7 @@ class GamesController < ApplicationController
 		respond_to do |format|
 			format.html do 
 				@game = Game.find(params[:id])
+				@players = @game.players.find(:all, :order => 'score desc')
 				@current_round = @game.rounds.last
 				if Player.where(user_id: current_user.id, game_id: @game.id).first
 					@current_player = Player.where(user_id: current_user.id, game_id: @game.id).first

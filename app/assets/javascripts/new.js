@@ -244,10 +244,7 @@ $(function(){
       new DefinitionView();
     }
   }
-  else if ( pathName.split("/").length <= 3 && pathName.split("/")[1] == "games"){
-    new RoomView();
-  }
-  else if ( pathName.split("/")[1] == ""){
+  else if ( pathName.split("/").length <= 3 && pathName.split("/").length != 1 && pathName.split("/")[1] == "games"){
     new RoomView();
   }
 });
