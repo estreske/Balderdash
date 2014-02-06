@@ -245,6 +245,7 @@ h4#tab{
 
 	  /* Should be unset in IE9+ I think. */
 	  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
 
 .fa {
     color: #F26101;
