@@ -4,6 +4,14 @@ before_filter :authenticate_user!
 # games GET    /games(.:format)               games#index
 	def index
 		@games = Game.all
+		respond_to do |format|
+			format.html do 
+				render :index
+			end
+			format.json do
+				render :json => {games: Game.to_json}
+			end
+		end
 	end
 #      POST   /games(.:format)               games#create
 	def create

@@ -22,4 +22,14 @@ class Game < ActiveRecord::Base
     return players
   end
 
+  def self.to_json
+    games = {}
+    Game.all.each do |game|
+      if game.in_session == false
+        games[game.id] = game.players.first.user.name
+      end
+    end
+    return games
+  end
+
 end

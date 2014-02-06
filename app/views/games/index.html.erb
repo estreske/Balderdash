@@ -1,5 +1,5 @@
 <!-- Show all of the games -->
-<ul class="list-unstyled">
+<ul id="roomView" class="list-unstyled">
 	<% @games.each do |game| %>
 	<% if game.in_session == false %>
 	<li><a class="game-room" id="<%= game.id %>" href="<%= game_path(game) %>"><%= game.players.first.user.name %>'s Game Room</a></li>

@@ -15,7 +15,7 @@ App.prototype.fetch = function(){
         //var gameView = new GameView(game);
         // gameView.render();
 
-        // var playerView = new PlayerView();
+        playerView = new PlayerView();
         // var players = data["players"];
         // for (i in players){
         //   var game_id = pathName.split("/")[2];
@@ -106,6 +106,8 @@ GameView.prototype = {
 
 function PlayerView(){
   this.players = [];
+  this.tbody = $('#players tbody');
+  this.setSync();
   // store the relevant dom elements as this.variables
 }
 
@@ -121,7 +123,7 @@ PlayerView.prototype = {
       success: function(data){
         console.log(data)
         if (data.status === 'more_players'){
-          PlayerView.players = [];
+          self.players = [];
           var players = data["players"];
           for (i in players){
             var game_id = pathName.split("/")[2];
@@ -129,7 +131,9 @@ PlayerView.prototype = {
             var score = players[i].score;
             var name = players[i].name;
             var player = new Player(game_id, score, name, player_id);
-            playerView.players.push(player);
+            self.players.push(player);
+            console.log(self);
+            self.render();
           };
           
         }
@@ -141,13 +145,12 @@ PlayerView.prototype = {
     this.interval = setInterval(function(){self.sync()},1000);
   },
   render: function(){
-    var table = $('<table>');
-
+    var self = this;
+    console.log(self);
+    $(this.tbody).empty();
     $(this.players).each(function(index, player) {
-      table.append(player.render());
+      $(self.tbody).append(player.render());
     });
-
-    return table;
   }
 }
 
@@ -299,7 +302,67 @@ DefinitionView.prototype = {
   submitDefinition: function(){
     // takes user input and creates an entry in the database
   }
+};
+
+function Room(game_id, name){
+  this.name = name;
+  this.game_id = game_id;
 }
+
+Room.prototype = {
+  render: function(){
+    var $newli = $('<li>');
+    $newli.html("<a href='/games/"+ this.game_id +"'>" + this.name + "'s Game Room</a>");
+    return $newli;
+  }
+}
+
+function RoomView(){
+  var rooms = []
+  this.$roomlist = $('ul#roomView');
+  console.log(this.$roomlist);
+  this.setSync();
+  console.log('room view made')
+}
+
+RoomView.prototype = {
+  render: function(){
+    var self = this;
+   self.$roomlist.empty();
+    $(this.rooms).each(function(index, room) {
+      self.$roomlist.append(room.render());
+    });
+    
+  },
+  sync: function(){
+    var self = this;
+    $.ajax({
+      url: "/games",
+      dataType: 'json',
+      method: 'get',
+      success: function(data){
+          console.log(data)
+          self.rooms = [];
+          var rooms = data["games"];
+          for (i in rooms){
+            var game_id = i;
+            var name = rooms[i];
+            var room = new Room(game_id, name);
+            self.rooms.push(room);
+            console.log(room);
+            self.render(); 
+            }
+      }
+    })
+  },
+  setSync: function(){
+    var self = this;
+    this.interval = setInterval(function(){self.sync()},1000);
+  },
+}
+
+
+
 
   $(function(){
     var pathName = window.location.pathname;
@@ -317,5 +380,8 @@ DefinitionView.prototype = {
         console.log('last')
         var definitionView = new DefinitionView();
       }
+    } else if ( pathName.split("/").length == 2 && pathName.split("/")[1] == "games"){
+      new RoomView();
     }
+
   });
