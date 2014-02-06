@@ -26,9 +26,10 @@ words = []
   end
 end
 
+words.shuffle!
 
 (0..1000).each do |x|
-  Word.create(name: words.shuffle[x][:name], definition: words.shuffle[x][:definition])
+  Word.create(name: words[x][:name], definition: words[x][:definition])
 end
 
 Word.where(name: "\n\nWord\n").destroy_all
