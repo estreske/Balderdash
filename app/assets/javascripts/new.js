@@ -230,9 +230,9 @@ RoomView.prototype = {
 $(function(){
   var pathName = window.location.pathname;
   var patharray = pathName.split("/");
-  if ( patharray[2] != '' ){
+  if ( patharray[2] && patharray[2] != '' ){
     var app = new App();
-    console.log('app')
+
 
     if ($('#whirlybird1').length == 1){
       new GameView();

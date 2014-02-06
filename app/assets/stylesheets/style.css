@@ -76,7 +76,7 @@ div#player-table {
 	text-align:center;
 }
 
-#player_def_submit {
+.btn .btn-primary {
 	margin:15px;
 }
 
