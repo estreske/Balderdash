@@ -12,6 +12,7 @@ App.prototype.fetch = function(){
     method: 'get',
     success: function(data){
       playerView = new PlayerView();
+      console.log('playerview is made')
         
     }
   });
@@ -206,6 +207,7 @@ RoomView.prototype = {
       dataType: 'json',
       method: 'get',
       success: function(data){
+        console.log(data)
           self.rooms = [];
           var rooms = data["games"];
           for (i in rooms){
@@ -227,8 +229,11 @@ RoomView.prototype = {
 
 $(function(){
   var pathName = window.location.pathname;
-  if (pathName.split("/").length > 3 && pathName.split("/")[1] == "games"){
+  var patharray = pathName.split("/");
+  if ( patharray[2] != '' ){
     var app = new App();
+    console.log('app')
+
     if ($('#whirlybird1').length == 1){
       new GameView();
     }
@@ -240,6 +245,9 @@ $(function(){
     }
   }
   else if ( pathName.split("/").length <= 3 && pathName.split("/")[1] == "games"){
+    new RoomView();
+  }
+  else if ( pathName.split("/")[1] == ""){
     new RoomView();
   }
 });
