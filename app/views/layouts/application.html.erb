@@ -13,17 +13,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%  if current_user %>
   <nav class="navbar">
     <div class="container">
   <ul class="list-inline">
     <li id="logo">Balderdash</li>
     <li class="special-hide">Not just another bullshit game</li>
-    <li class="pull-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-		<li class="pull-right">Welcome, <%= current_user.name %>!</li>
+    <li class="pull-right" ><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+		<li class="pull-right special-hide">Welcome, <%= current_user.name %>!</li>
     
    </ul>
 	</div>
 </nav>
+<% end %>
 <div class="container body">
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>

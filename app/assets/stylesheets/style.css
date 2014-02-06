@@ -5,14 +5,15 @@
 	position:relative;
 }
 
-.sans {
+body {
 	font-family: 'ubuntu', sans-serif;
+	font-weight:300;
 }
 
 #logo {
 	font-family: 'vollkorn', serif;
 	font-weight:700;
-	font-size:30px;
+	font-size:20px;
 }
 
 
@@ -38,7 +39,7 @@ div#player-table {
 }
 
 .special-hide {
-	
+	display:none !important;
 }
 
 /* Extra small devices (phones, less than 768px) */
@@ -46,12 +47,15 @@ div#player-table {
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
+	.special-hide {
+		display:inline-block !important;
+	}
 
 	div#player-table{
-	position:absolute;
-	top:0px;
-	right:0px;
-	width: 16% !important;
+		position:absolute;
+		top:0px;
+		right:0px;
+		width: 16% !important;
 	}
  }
 
