@@ -18,6 +18,7 @@ class PlayersController < ApplicationController
   #         DELETE /players/:id(.:format)         players#destroy
  	def destroy
     player = Player.find(params[:id])
+    player.destroy
     redirect_to root_path
  	end
 end
