@@ -13,11 +13,17 @@ Balderdash::Application.routes.draw do
 
   get '/games/:id/begin' => 'games#begin'
 
-  get '/games/players' => 'games#players'
+  get '/games/:id/players' => 'games#players'
 
-  get '/rounds/definitions' => 'rounds#definitions'
+  get '/games/:id/round' => 'games#round'
 
-  get '/rounds/complete' => 'rounds#complete'
+  get '/games/:id/rounds' => 'games#rounds'
+
+  get '/rounds/:id/definitions' => 'rounds#definitions'
+
+  get '/rounds/:id/picks' => 'rounds#picks'
+
+  get '/rounds/:id/complete' => 'rounds#complete'
 
   resources :games, :except => [:edit, :update, :new]
   resources :players, :only => [:create, :destroy, :update]

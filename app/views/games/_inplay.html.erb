@@ -10,7 +10,7 @@
 <!-- Show them a spinning wheel while they wait -->
 
 <% if @game.rounds.last.guessed_players.include?(@current_player) %>
-<i class="fa fa-refresh fa-spin fa-5x"></i>
+<i id="whirlybird2" class="fa fa-refresh fa-spin fa-5x"></i>
 
 <!-- Or if this player hasn't guessed yet -->
 <!-- Let them guess -->
@@ -37,7 +37,7 @@
 <!-- Show them a spinning wheel  -->
 
 
-<i class="fa fa-refresh fa-spin fa-5x"></i>
+<i id="whirlybird3" class="fa fa-refresh fa-spin fa-5x"></i>
 
 
 <!-- But if this player hasn't picked yet -->

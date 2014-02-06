@@ -44,20 +44,25 @@ before_filter :authenticate_user!
 		## responds to $('#start_game').on('click')
 		## returns game, round, and word
 		respond_to do |format|
+			# # format.html do 
+			# 	@game = Game.find(params[:id])
+			# 	@game.start
+			# 	# render :show
+			# # end
 			format.json do
 				game = Game.find(params[:id])
 				game.start
 				# ^ creates the first round in the game
-				render :json => {game: game, round: game.rounds.last, word: game.rounds.last.word}.to_json
+				render :json => {game: game, round: game.rounds.last, word: game.rounds.last.word}
 			end
 		end
-		#redirect_to game_path(game)
+		# redirect_to game_path(params[:id])
 	end
 
 	def begin 
 		## waits til game is in_session
 		## then returns game, round, and word
-		game = Game.find(params[:game_id])
+		game = Game.find(params[:id])
 		respond_to do |format|
 			format.json do
 				if game.in_session
@@ -72,11 +77,11 @@ before_filter :authenticate_user!
 	def players
 		## returns all players
 		## responds one by one to sync JS object.length with Rails game.players.count
-		game = Game.find(params[:game_id])
+		game = Game.find(params[:id])
 		respond_to do |format|
 			format.json do
 				if game.players.count != params[:player_count]
-					render :json => {status: 'more_players', player: game.players}.to_json
+					render :json => {status: 'more_players', players: game.players_to_json}
 				else
 					render :json => {status: 'waiting'}.to_json
 				end
@@ -84,13 +89,14 @@ before_filter :authenticate_user!
 		end
 	end
 
-	def rounds 
+	def round 
 		## returns a new round
 		## response to $('#new_round')on.click
 		game = Game.find(params[:game_id])
+		current_round = game.rounds.last
 		respond_to do |format|
 			format.json do
-				render :json => {status: 'new_round', round: game.rounds.last}.to_json
+				render :json => {status: 'new_round', game_id: game.id, round_id: current_round.id, word: current_round.word.name}
 			end
 		end
 	end
@@ -109,6 +115,34 @@ before_filter :authenticate_user!
 			end
 		end
 	end
+
+def rounds
+	game = Game.find(params[:id])
+	current_round = game.rounds.last
+	respond_to do |format|
+		format.json do
+			if current_round.all_submitted?
+				render :json => {status: 'all_submitted'}
+			else
+				render :json => {status: 'waiting'}
+			end
+		end
+	end
+end
+
+def picks
+	game = Game.find(params[:id])
+	current_round = game.rounds.last
+	respond_to do |format|
+		format.json do
+			if current_round.all_picked?
+				render :json => {status: 'all_picked'}
+			else
+				render :json => {status: 'waiting'}
+			end
+		end
+	end
+end
 
 
 end
