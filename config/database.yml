@@ -17,8 +17,9 @@ development:
   encoding: unicode
   database: balderdash_development
   pool: 5
-  username: postgres
-  password: password
+  username: 
+  password: 
+
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -43,13 +44,15 @@ test:
   encoding: unicode
   database: balderdash_test
   pool: 5
-  username: postgres
-  password: password
+  username: 
+  password: 
+
 
 production:
   adapter: postgresql
   encoding: unicode
   database: balderdash_production
   pool: 5
-  username: postgres
-  password: password
+  username: 
+  password: 
+

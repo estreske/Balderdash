@@ -20,8 +20,8 @@
 
 		<!-- Show them a spinning wheel while they wait -->
 
-		<i id="whirlybird2" class="fa fa-refresh fa-spin fa-5x"></i>
-
+		<i id="whirlybird2" class="fa fa-cog fa-spin fa-5x"></i>
+    <p>Waiting on other players</p>
 	<% else %>
 
 		<!-- Or if this player hasn't guessed yet -->
@@ -49,22 +49,22 @@
 
 <!-- Show them a spinning wheel  -->
 
-	<i id="whirlybird3" class="fa fa-refresh fa-spin fa-5x"></i>
-
+	<i id="whirlybird3" class="fa fa-cog fa-spin fa-5x"></i>
+  <p>Waiting on other players</p>
 <!-- But if this player hasn't picked yet -->
 
 	<% else %>
 
 <!-- Let this player pick one of the definitions -->
 
-	<h2>Select the correct definition below:</h2>
+	<p>Select the correct definition below:</p>
 	<hr>
 
 	<% @game.rounds.last.definitions.shuffle.each do |definition| %>
 		<form method="post" action="<%= picks_path %>">
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 			<input type="hidden" name="definition_id" value="<%= definition.id %>">
-			<button type="submit" id="submit_<%= definition.id %>">
+			<button class="btn btn-primary" type="submit" id="submit_<%= definition.id %>">
 			<%= definition.content %></button>
 		</form>
 		<% end %>
@@ -76,7 +76,7 @@
 <% elsif @game.rounds.last.picks.count >= @game.players.count %>
 	<h4>The correct definition is:</h4>
 	<h2><%= @game.rounds.last.word.definition %></h2>
-	<ul>
+	<ul class="list-unstyled">
 		<% @game.rounds.last.picks.each do |pick|  %>
 
 		<!-- If the definition that this user picked WAS created by a player -->

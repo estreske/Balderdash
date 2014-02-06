@@ -11,9 +11,7 @@ App.prototype.fetch = function(){
     dataType: 'json',
     method: 'get',
     success: function(data){
-      playerView = new PlayerView();
-      console.log('playerview is made')
-        
+      playerView = new PlayerView();  
     }
   });
 }
@@ -138,7 +136,6 @@ RoundView.prototype = {
   setSync: function(){
     var self = this;
     this.interval = setInterval(function(){self.sync()},1000);
-    console.log('interval set');
   },
 };
 
@@ -207,7 +204,6 @@ RoomView.prototype = {
       dataType: 'json',
       method: 'get',
       success: function(data){
-        console.log(data)
           self.rooms = [];
           var rooms = data["games"];
           for (i in rooms){
@@ -244,10 +240,7 @@ $(function(){
       new DefinitionView();
     }
   }
-  else if ( pathName.split("/").length <= 3 && pathName.split("/")[1] == "games"){
-    new RoomView();
-  }
-  else if ( pathName.split("/")[1] == ""){
+  else if ( pathName.split("/").length <= 3 && pathName.split("/").length != 1 && pathName.split("/")[1] == "games"){
     new RoomView();
   }
 });
