@@ -187,7 +187,7 @@ text-decoration: none;
 /* rules slideout */
 #slideout {
   position: fixed;
-  top: 350px;
+  top: 100px;
   left: 0;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
@@ -199,7 +199,7 @@ text-decoration: none;
 	background-color: #D9E8F5;
 	width: 350px;
   position: fixed;
-  top: 350px;
+  top: 100px;
   left: -350px;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
