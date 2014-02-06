@@ -25,6 +25,10 @@ before_filter :authenticate_user!
 		respond_to do |format|
 			format.html do 
 				@game = Game.find(params[:id])
+				@current_round = @game.rounds.last
+				if Player.where(user_id: current_user.id, game_id: @game.id).first
+					@current_player = Player.where(user_id: current_user.id, game_id: @game.id).first
+				end
 				render :show
 			end
 			format.json do
@@ -44,17 +48,17 @@ before_filter :authenticate_user!
 		## responds to $('#start_game').on('click')
 		## returns game, round, and word
 		respond_to do |format|
-			# # format.html do 
-			# 	@game = Game.find(params[:id])
-			# 	@game.start
-			# 	# render :show
-			# # end
-			format.json do
-				game = Game.find(params[:id])
-				game.start
-				# ^ creates the first round in the game
-				render :json => {game: game, round: game.rounds.last, word: game.rounds.last.word}
-			end
+			format.html do 
+				@game = Game.find(params[:id])
+				@game.start
+				redirect_to game_path(@game)
+			 end
+			# format.json do
+			# 	game = Game.find(params[:id])
+			# 	game.start
+			# 	# ^ creates the first round in the game
+			# 	render :json => {game: game, round: game.rounds.last, word: game.rounds.last.word}
+			# end
 		end
 		# redirect_to game_path(params[:id])
 	end

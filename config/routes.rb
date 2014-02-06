@@ -19,9 +19,9 @@ Balderdash::Application.routes.draw do
 
   get '/games/:id/rounds' => 'games#rounds'
 
-  get '/rounds/:id/definitions' => 'rounds#definitions'
+  get '/games/:id/definitions' => 'games#definitions'
 
-  get '/rounds/:id/picks' => 'rounds#picks'
+  get '/games/:id/picks' => 'games#picks'
 
   get '/rounds/:id/complete' => 'rounds#complete'
 
