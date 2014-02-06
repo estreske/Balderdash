@@ -4,7 +4,7 @@
   <form action="/games/<%= @game.id %>/start" method="post">
     <input type="hidden" name="_method" value="put" />
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
-    <button type="submit" id="start_game">Start Game</button>
+    <button class="btn btn-primary" type="submit" id="start_game">Start Game</button>
   </form>
   
 <!-- the current has joined this game --> 
@@ -18,6 +18,6 @@
   <form action="<%= players_path %>" method="post">
     <input type="hidden" name="game_id" value="<%= @game.id %>" />
 	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
-    <button type="submit" id="join_game">Join Game</button>
+    <button class="btn btn-primary" type="submit" id="join_game">Join Game</button>
   </form>
 <% end %>

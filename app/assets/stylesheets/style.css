@@ -33,13 +33,96 @@ div#player-table {
 
 .navbar {
 	padding-top:15px;
-	background-color:black;
+	background-color:#304269;
 	color:white;
 	border-radius: 0px;
 }
 
+.navbar a {
+	color:white;
+}
+
 .special-hide {
 	display:none !important;
+}
+
+.btn-primary {
+	background-color:#F26101;
+	border-color: #F26101;
+}
+
+.btn-primary:hover {
+	background-color:#d95701;
+	border-color:#d95701;
+}
+
+#round-count {
+	font-family: 'ubuntu', sans-serif;
+	font-weight:300;
+	font-size:15px;
+}
+
+.sidenote {
+	font-family: 'ubuntu', sans-serif;
+	font-weight:300;
+	color:#cecece;
+}
+
+#inputdef {
+	width:80%;
+	height:50px;
+	font-family: 'ubuntu', sans-serif;
+	font-weight:300;
+	text-align:center;
+}
+
+#player_def_submit {
+	margin:15px;
+}
+
+.ribbon {
+ font-size: 2em !important;
+ width: 50%;
+ position: relative;
+ background: #91bed4;
+ color: #fff;
+ text-align: center;
+ padding: 1em 2em; /* Adjust to suit */
+ margin: 1em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+}
+.ribbon:before, .ribbon:after {
+ content: "";
+ position: absolute;
+ display: block;
+ bottom: -1em;
+ border: 1.5em solid #7fb3cd;
+ z-index: -1;
+}
+.ribbon:before {
+ left: -2em;
+ border-right-width: 1.5em;
+ border-left-color: transparent;
+}
+.ribbon:after {
+ right: -2em;
+ border-left-width: 1.5em;
+ border-right-color: transparent;
+}
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+ content: "";
+ position: absolute;
+ display: block;
+ border-style: solid;
+ border-color: #6ca8c6 transparent transparent transparent;
+ bottom: -1em;
+}
+.ribbon .ribbon-content:before {
+ left: 0;
+ border-width: 1em 0 0 1em;
+}
+.ribbon .ribbon-content:after {
+ right: 0;
+ border-width: 1em 1em 0 0;
 }
 
 /* Extra small devices (phones, less than 768px) */
@@ -55,7 +138,7 @@ div#player-table {
 		position:absolute;
 		top:0px;
 		right:0px;
-		width: 16% !important;
+		width: 18% !important;
 	}
  }
 
