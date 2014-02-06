@@ -1,5 +1,5 @@
-<div>
-  <table>
+<div id="player-table">
+  <table id="players" class="table">
     <thead>
       <tr>
         <td>Player Name</td>
@@ -23,9 +23,9 @@
     <h1><%= winner.user.name %></h1>
     <% end %>
     <h1>have tied for First Place!</h1>
-    <% end %>
+  <% end %>
 
-  </div>
+</div>
 
-  <%= link_to "Return to Games Page", games_path %>
+<%= link_to "Return to Games Page", games_path %>
 

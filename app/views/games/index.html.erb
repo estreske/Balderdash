@@ -5,9 +5,9 @@
 <!-- Show all of the games -->
 <ul id="roomView" class="list-unstyled">
 	<% @games.each do |game| %>
-	<% if game.in_session == false %>
-	<li><a class="game-room" id="<%= game.id %>" href="<%= game_path(game) %>"><%= game.players.first.user.name %>'s Game Room</a></li>
-	<% end %>
+  	<% if game.in_session == false %>
+  	 <li><a class="game-room" id="<%= game.id %>" href="<%= game_path(game) %>"><%= game.players.first.user.name %>'s Game Room</a></li>
+  	<% end %>
 	<% end %>
 </ul>
 <!-- SAllow users to create a new game -->

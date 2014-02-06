@@ -34,5 +34,4 @@ class Round < ActiveRecord::Base
       return false
     end
   end
-
 end
