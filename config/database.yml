@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: balderdash_development
   pool: 5
-  username: postgres
+  username: tekrental
   password: password
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,7 +43,7 @@ test:
   encoding: unicode
   database: balderdash_test
   pool: 5
-  username: postgres
+  username: tekrental
   password: password
 
 production:
@@ -51,5 +51,5 @@ production:
   encoding: unicode
   database: balderdash_production
   pool: 5
-  username: postgres
+  username: tekrental
   password: password
