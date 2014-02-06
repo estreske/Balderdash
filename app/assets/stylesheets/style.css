@@ -15,11 +15,17 @@ body {
 	position:relative;
 }
 
+<<<<<<< HEAD
 
 .description {
 	margin:15px;
 }
 
+=======
+.description {
+	margin:15px;
+}
+>>>>>>> b8b57073a45bb361225cb300d3ec7a93201b88f2
 
 body {
 	font-family: 'ubuntu', sans-serif;
