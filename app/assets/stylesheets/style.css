@@ -42,6 +42,11 @@ div#player-table {
 
 .navbar a {
 	color:white;
+
+}
+
+a:hover {
+text-decoration: none;
 }
 
 .special-hide {
