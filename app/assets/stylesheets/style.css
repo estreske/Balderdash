@@ -8,6 +8,14 @@ body {
 	font-size:14px;
 }
 
+.devise input {
+	width:80%;
+}
+
+#user_remember_me {
+	width:auto;
+}
+
 .body.container {
 	font-family: 'vollkorn', serif;
 	font-size: 16px;
@@ -15,13 +23,9 @@ body {
 	position:relative;
 }
 
-<<<<<<< HEAD
 .description {
 	margin:15px;
 }
-=======
-
->>>>>>> 08fca443c76ef26cdb50fc4af1e25b8eea0b9375
 
 body {
 	font-family: 'ubuntu', sans-serif;
@@ -49,6 +53,15 @@ div#player-table {
 	width: 100%;
 }
 
+.bullshit {
+	width:40%;
+}
+
+.super {
+	font-weight:300;
+	font-size: 35px;
+}
+
 .navbar {
 	padding-top:15px;
 	background-color:#91BED4;
@@ -56,6 +69,13 @@ div#player-table {
 	border-radius: 0px;
 	box-shadow: 0px 5px 3px rgba(0,0,0,0.4);
 	text-shadow: 0px 1px 1px rgba(0,0,0,0.4);
+}
+
+.home {
+	position:relative;
+	z-index:-100;
+	margin: 0 auto;
+	width:20%;
 }
 
 .navbar a {
@@ -117,7 +137,7 @@ div#player-table {
  color: #fff;
  text-align: center;
  padding: 1em 2em; /* Adjust to suit */
- margin: 1em auto 1em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+ margin: 1em auto 1.5em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
 }
 .ribbon:before, .ribbon:after {
  content: "";
@@ -182,6 +202,10 @@ div#player-table {
 		right:0px;
 		width: 200px !important;
 	}
+	.super {
+		font-weight:700;
+		font-size: 50px;
+	}	
 
 	table#players {
 		background-color:white;

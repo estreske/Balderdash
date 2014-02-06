@@ -100,13 +100,13 @@
 		<form method="post" action="<%= rounds_path %>">
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 			<input type="hidden" name="game_id" value="<%= @game.id %>">
-			<button type="submit" id="submit">Next Round</button>
+			<button class"btn btn-primary" type="submit" id="submit">Next Round</button>
 		</form>
 
 	<% elsif @game.rounds.count == 7 %>
 		<form action="<%= game_win_path(@game) %>">
     	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
-			<button type="submit" id="submit">Complete Game</button>
+			<button class"btn btn-primary"  type="submit" id="submit">Complete Game</button>
 		</form>
 		
 	<% end %>

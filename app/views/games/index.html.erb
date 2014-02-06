@@ -1,4 +1,5 @@
-<h1>BALDERDASH</h1>
+<%= image_tag "bullshit.png", class: 'bullshit home' %>
+<h1 class="super">Balderdash</h1>
 <p>[bôl′dər-dăsh′] n.
 1. senseless, stupid, or exaggerated talk or writing; nonsense.</p>
 
@@ -10,8 +11,10 @@
   	<% end %>
 	<% end %>
 </ul>
-<!-- SAllow users to create a new game -->
 <form method="post" action="<%= games_path %>">
 	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 	<button type="submit" class="btn btn-primary">Create a Game</button>
 </form>
+
+
+<!-- SAllow users to create a new game -->
