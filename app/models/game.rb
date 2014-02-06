@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
 
   def players_to_json
     players = {}
-    self.players.each do |player|
+    self.players.find(:all, :order => 'score desc').each do |player|
       new_player = {}
       new_player[:name] = player.user.name
       new_player[:score] = player.score
