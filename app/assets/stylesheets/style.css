@@ -5,6 +5,8 @@
 	position:relative;
 }
 
+
+
 body {
 	font-family: 'ubuntu', sans-serif;
 	font-weight:300;
@@ -123,6 +125,10 @@ div#player-table {
 .ribbon .ribbon-content:after {
  right: 0;
  border-width: 1em 1em 0 0;
+}
+
+.fa {
+    color: #F26101;
 }
 
 /* Extra small devices (phones, less than 768px) */
