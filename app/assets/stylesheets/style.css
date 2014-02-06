@@ -1,0 +1,68 @@
+.body.container {
+	font-family: 'vollkorn', serif;
+	font-size: 16px;
+	text-align:center;
+	position:relative;
+}
+
+.sans {
+	font-family: 'ubuntu', sans-serif;
+}
+
+#logo {
+	font-family: 'vollkorn', serif;
+	font-weight:700;
+	font-size:30px;
+}
+
+
+h1, h2,  h3, h4 {
+	font-family: 'vollkorn', serif;
+	font-weight: 700;
+}
+
+table#players{
+	width:100%;
+	border: 1px solid rgb(153, 153, 153);
+}
+
+div#player-table {
+	width: 100%;
+}
+
+.navbar {
+	padding-top:15px;
+	background-color:black;
+	color:white;
+	border-radius: 0px;
+}
+
+.special-hide {
+	
+}
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+
+	div#player-table{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width: 16% !important;
+	}
+ }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+
+ }

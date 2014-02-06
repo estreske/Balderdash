@@ -4,6 +4,8 @@
   <script> 
     var user = <%= current_user.to_json(only: [:name, :id]).html_safe %>
   </script>
+  <script type="text/javascript" src="//use.typekit.net/wfq0vai.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <link rel="shortcut icon" href="/favicon.ico/"/>
   <title>Balderdash</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -11,21 +13,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<% if user_signed_in? %>
-		<h3>Welcome <%= current_user.name %></h3>
-	<% else %>
-
-	<% end %>
-<div class="container">
+  <nav class="navbar">
+    <div class="container">
+  <ul class="list-inline">
+    <li id="logo">Balderdash</li>
+    <li class="special-hide">Not just another bullshit game</li>
+    <li class="pull-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+		<li class="pull-right">Welcome, <%= current_user.name %>!</li>
+    
+   </ul>
+	</div>
+</nav>
+<div class="container body">
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
-
-  <% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-  </li>
-<% else %>
- <% end %>
 
   <%= yield %>
 </div>
