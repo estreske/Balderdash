@@ -1,3 +1,13 @@
+body {
+	background-color: #f8fbfd
+}
+
+.devise {
+	font-family: 'ubuntu', sans-serif;
+	font-weight:300;
+	font-size:14px;
+}
+
 .body.container {
 	font-family: 'vollkorn', serif;
 	font-size: 16px;
@@ -5,6 +15,10 @@
 	position:relative;
 }
 
+
+.description {
+	margin:15px;
+}
 
 
 body {
@@ -35,18 +49,24 @@ div#player-table {
 
 .navbar {
 	padding-top:15px;
-	background-color:#304269;
-	color:white;
+	background-color:#91BED4;
+	color:black;
 	border-radius: 0px;
+	box-shadow: 0px 5px 3px rgba(0,0,0,0.4);
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.4);
 }
 
 .navbar a {
+
 	color:white;
 
 }
 
 a:hover {
 text-decoration: none;
+
+	color:black;
+
 }
 
 .special-hide {
@@ -67,6 +87,11 @@ text-decoration: none;
 	font-family: 'ubuntu', sans-serif;
 	font-weight:300;
 	font-size:15px;
+	background-color:#304269;
+	border-radius: 5px;
+	display: inline;
+	color:white;
+	padding:5px;
 }
 
 .sidenote {
@@ -83,19 +108,23 @@ text-decoration: none;
 	text-align:center;
 }
 
-.btn .btn-primary {
+.btn {
 	margin:15px;
 }
 
+#signup {
+	border-left: none;
+}
+
 .ribbon {
- font-size: 2em !important;
- width: 50%;
+ font-size: 1.6em !important;
+ width: 80%;
  position: relative;
  background: #91bed4;
  color: #fff;
  text-align: center;
  padding: 1em 2em; /* Adjust to suit */
- margin: 1em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+ margin: 1em auto 1em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
 }
 .ribbon:before, .ribbon:after {
  content: "";
@@ -140,16 +169,29 @@ text-decoration: none;
 /* No media query since this is the default in Bootstrap */
 
 /* Small devices (tablets, 768px and up) */
+
+
 @media (min-width: 768px) { 
+	#signup {
+		border-left: 1px solid #cccccc;
+	}
+
 	.special-hide {
 		display:inline-block !important;
+	}
+	.ribbon {
+		width:50%;
 	}
 
 	div#player-table{
 		position:absolute;
 		top:0px;
 		right:0px;
-		width: 18% !important;
+		width: 200px !important;
+	}
+
+	table#players {
+		background-color:white;
 	}
  }
 
