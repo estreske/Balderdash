@@ -9,22 +9,22 @@
 <!-- But this player has guessed-->
 <!-- Show them a spinning wheel while they wait -->
 
-<% if @game.rounds.last.guessed_players.include?(@current_player) %>
-<i id="whirlybird2" class="fa fa-refresh fa-spin fa-5x"></i>
+	<% if @game.rounds.last.guessed_players.include?(@current_player) %>
+	<i id="whirlybird2" class="fa fa-refresh fa-spin fa-5x"></i>
 
-<!-- Or if this player hasn't guessed yet -->
-<!-- Let them guess -->
+	<!-- Or if this player hasn't guessed yet -->
+	<!-- Let them guess -->
 
-<% else %>
-<div class="def_input">
-	<form method="post" action="<%= definitions_path %>">
-		<input type="text" name="content" id="player_def">
-		<input type="hidden" name="round_id" value="<%= @game.rounds.last.id %>">
-		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
-		<button type="submit" id="player_def_submit">Submit</button>
-	</form>
-</div>
-<% end %>
+	<% else %>
+	<div class="def_input">
+		<form method="post" action="<%= definitions_path %>">
+			<input type="text" name="content" id="player_def">
+			<input type="hidden" name="round_id" value="<%= @game.rounds.last.id %>">
+			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+			<button type="submit" id="player_def_submit">Submit</button>
+		</form>
+	</div>
+	<% end %>
 
 <!-- If all the players have guessed -->
 
@@ -32,40 +32,40 @@
 
 <!-- But this player has already picked -->
 
-<% if @game.rounds.last.picked_players.include?(@current_player) %>
+	<% if @game.rounds.last.picked_players.include?(@current_player) %>
 
 
 <!-- Show them a spinning wheel  -->
 
 
-<i id="whirlybird3" class="fa fa-refresh fa-spin fa-5x"></i>
+	<i id="whirlybird3" class="fa fa-refresh fa-spin fa-5x"></i>
 
 
 <!-- But if this player hasn't picked yet -->
-<% else %>
+	<% else %>
 
 
 <!-- Let this player pick one of the definitions -->
 
 
 
-<h2>Select the correct definition below</h2>
-<hr>
+	<h2>Select the correct definition below</h2>
+	<hr>
 
-<% @game.rounds.last.definitions.shuffle.each do |definition| %>
-<form method="post" action="<%= picks_path %>">
-	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
-	<input type="hidden" name="definition_id" value="<%= definition.id %>">
-	<button type="submit" id="submit_<%= definition.id %>">
-		<%= definition.content %></button>
-	</form>
+	<% @game.rounds.last.definitions.shuffle.each do |definition| %>
+	<form method="post" action="<%= picks_path %>">
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+		<input type="hidden" name="definition_id" value="<%= definition.id %>">
+		<button type="submit" id="submit_<%= definition.id %>">
+			<%= definition.content %></button>
+		</form>
+		<% end %>
 	<% end %>
-<% end %>
 
 	<!-- If all the players have picked -->
 	<!-- Show what happened -->
 
-	<% elsif @game.rounds.last.picks.count >= @game.players.count %>
+<% elsif @game.rounds.last.picks.count >= @game.players.count %>
 	<h4>The correct definition is:</h4>
 	<h2><%= @game.rounds.last.word.definition %></h2>
 	<ul>
@@ -102,6 +102,6 @@
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 		<button type="submit" id="submit">Complete Game</button>
 	</form>
-	<% end %>
-	<% end %>
+<% end %>
+<% end %>
 

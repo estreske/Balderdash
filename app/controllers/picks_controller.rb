@@ -22,7 +22,7 @@ class PicksController < ApplicationController
 		# if the definition is correct 
 		# (if the picked definition doesn't have a player_creator)
 		else
-			player.add_point
+			2.times{player.add_point}
 		end
 
 

@@ -27,7 +27,6 @@ App.prototype.fetch = function(){
         // };
         // console.log(playerView.players);
         // console.log(game);
-        console.log('created the app')
       }
     });
 }
@@ -50,35 +49,31 @@ function GameView(game){
 }
 
 GameView.prototype = {
-  initialize: function() {
-    PlayerView.render()
-},
+  // beginRound: function(){
+  //   $.ajax({
+  //     url: "/games/" + pathName.split("/")[2] + "/round",
+  //     dataType: 'json',
+  //     method: 'get',
+  //     success: function(data){
+  //       var game_id = data["game_id"];
+  //       var word = data["word"];
+  //       var round_id = data["round_id"];
+  //       var round = new Round(game_id, word, round_id);
+  //       var view = new RoundView(round)
+  //     }
+  //   })
+  // },
 
-  beginRound: function(){
-    $.ajax({
-      url: "/games/" + pathName.split("/")[2] + "/round",
-      dataType: 'json',
-      method: 'get',
-      success: function(data){
-        var game_id = data["game_id"];
-        var word = data["word"];
-        var round_id = data["round_id"];
-        var round = new Round(game_id, word, round_id);
-        var view = new RoundView(round)
-      }
-    })
-  },
+  // finishRound: function(){
+  //   // render results
+  //   // render newRoundButton // on('click') this.beginRound()
+  // },
 
-  finishRound: function(){
-    // render results
-    // render newRoundButton // on('click') this.beginRound()
-  },
+  // renderWaiting: function(){
 
-  renderWaiting: function(){
-
-    $('<i>').addClass("fa fa-refresh fa-spin fa-5x").append('body');//future change body to div class name
-      this.setFetch();
-  },
+  //   $('<i>').addClass("fa fa-refresh fa-spin fa-5x").append('body');//future change body to div class name
+  //     this.setFetch();
+  // },
   sync: function(){
     var pathName = window.location.pathname;
     var self = this;
@@ -121,8 +116,6 @@ PlayerView.prototype = {
       dataType: 'json',
       method: 'get',
       success: function(data){
-        console.log(data)
-        if (data.status === 'more_players'){
           self.players = [];
           var players = data["players"];
           for (i in players){
@@ -132,11 +125,8 @@ PlayerView.prototype = {
             var name = players[i].name;
             var player = new Player(game_id, score, name, player_id);
             self.players.push(player);
-            console.log(self);
             self.render();
-          };
-          
-        }
+            }
       }
     })
   },
@@ -169,22 +159,21 @@ Player.prototype = {
     var table_score_cell = $('<td>').text(this.score);
     table_row.append(table_name_cell).append(table_score_cell);
     return table_row;
-  // creates tr
   }
 }
 
-function Round(game_id, word, round_id){
-  this.game_id = game_id;  
-  this.word = word;
-  this.round_id = round_id;
-}
+// function Round(game_id, word, round_id){
+//   this.game_id = game_id;  
+//   this.word = word;
+//   this.round_id = round_id;
+// }
 
-Round.prototype = {
-  submit: function(){
-  // ajax call to 'definition/create'
-  // put submission in database
-  }
-}
+// Round.prototype = {
+//   submit: function(){
+//   // ajax call to 'definition/create'
+//   // put submission in database
+//   }
+// }
 
 
 function RoundView(){
@@ -194,23 +183,23 @@ function RoundView(){
 }
 
 RoundView.prototype = {
-  renderWaiting: function(){
-    $('<i>').addClass("fa fa-refresh fa-spin fa-5x").append('body');//future change body to div class name
-      this.setFetch();
-  },
+  // renderWaiting: function(){
+  //   $('<i>').addClass("fa fa-refresh fa-spin fa-5x").append('body');//future change body to div class name
+  //     this.setFetch();
+  // },
   
-  renderInput: function(){
-    var self = this;
-    var word_container = $('div').addClass('word-container').text(this.round.word);
-    var def_field = $('<textarea>');
-    var def_submit_btn = $('<button>').addClass('btn btn-primary');
-    var def_input_container = $('<div>').addClass('def-input-container').append(def_field).append(def_submit_btn)
-    $('body').append(word_container);
-    def_submit_btn.on('click', function(){
-      self.renderWaiting();
-      self.round.submit();
-    });
-  },
+  // renderInput: function(){
+  //   var self = this;
+  //   var word_container = $('div').addClass('word-container').text(this.round.word);
+  //   var def_field = $('<textarea>');
+  //   var def_submit_btn = $('<button>').addClass('btn btn-primary');
+  //   var def_input_container = $('<div>').addClass('def-input-container').append(def_field).append(def_submit_btn)
+  //   $('body').append(word_container);
+  //   def_submit_btn.on('click', function(){
+  //     self.renderWaiting();
+  //     self.round.submit();
+  //   });
+  // },
   sync: function(){
     var pathName = window.location.pathname;
     var self = this;
@@ -233,34 +222,34 @@ RoundView.prototype = {
   },
 };
 
-function Definition(round_id, content, id){
-  this.round_id = round_id; 
-  this.content = content;
-  this.id = id;
-}
+// function Definition(round_id, content, id){
+//   this.round_id = round_id; 
+//   this.content = content;
+//   this.id = id;
+// }
 
-Definition.prototype = {
-  render: function(){
-      var def_content = $('<li>').text(this.content);
-      def_content.on('click', function(){
-        this.pick();
-      });
-    // render li
-    return def_content;
-    // render li
-    // on('click', this.pick())
-  },
+// Definition.prototype = {
+//   // render: function(){
+//   //     var def_content = $('<li>').text(this.content);
+//   //     def_content.on('click', function(){
+//   //       this.pick();
+//   //     });
+//   //   // render li
+//   //   return def_content;
+//   //   // render li
+//   //   // on('click', this.pick())
+//   // },
 
-  pick: function(){
-    // ajax call to '/picks/create'
-  },
+//   pick: function(){
+//     // ajax call to '/picks/create'
+//   },
 
-  add: function(){
-    // Make the AJAX call to create a new round
-    // returns json data on success
-  }
+//   add: function(){
+//     // Make the AJAX call to create a new round
+//     // returns json data on success
+//   }
 
-}
+// }
 
 
 function DefinitionView(){
@@ -273,16 +262,16 @@ DefinitionView.prototype = {
     var self = this;
     this.interval = setInterval(function(){self.sync()},1000);
   },
-  fetch: function(){  
+  // fetch: function(){  
 
-  },
-  render: function(){
-    var def_container = $('<ul>').addClass('def-container');
-    $(this.definitions).each(function(index, definition) {
-      def_container.append(definition.render());
-    });
-  // render ul
-  },
+  // },
+  // render: function(){
+  //   var def_container = $('<ul>').addClass('def-container');
+  //   $(this.definitions).each(function(index, definition) {
+  //     def_container.append(definition.render());
+  //   });
+  // // render ul
+  // },
   sync: function(){
     var self = this;
     var pathName = window.location.pathname;
@@ -299,9 +288,9 @@ DefinitionView.prototype = {
     })
   },
 
-  submitDefinition: function(){
-    // takes user input and creates an entry in the database
-  }
+  // submitDefinition: function(){
+  //   // takes user input and creates an entry in the database
+  // }
 };
 
 function Room(game_id, name){
@@ -366,7 +355,7 @@ RoomView.prototype = {
 
   $(function(){
     var pathName = window.location.pathname;
-    if (pathName.split("/").length > 2 && pathName.split("/")[1] == "games"){
+    if (pathName.split("/").length > 3 && pathName.split("/")[1] == "games"){
       var app = new App();
       if ($('#whirlybird1').length == 1){
         console.log('i got it!')
