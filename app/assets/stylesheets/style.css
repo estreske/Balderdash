@@ -79,7 +79,16 @@ div#player-table {
 }
 
 .navbar a {
+
+	color:white;
+
+}
+
+a:hover {
+text-decoration: none;
+
 	color:black;
+
 }
 
 .special-hide {
@@ -174,17 +183,80 @@ div#player-table {
  border-width: 1em 1em 0 0;
 }
 
+
+/* rules slideout */
+#slideout {
+  position: fixed;
+  top: 350px;
+  left: 0;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+#slideout_inner {
+	padding: 10px 25px;
+	background-color: #D9E8F5;
+	width: 350px;
+  position: fixed;
+  top: 350px;
+  left: -350px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+#slideout:hover {
+  left:350px;
+}
+#slideout:hover #slideout_inner {
+  left: 0;
+}
+h4#tab{
+	border-bottom-left-radius: 2em;
+	border-bottom-right-radius: 2em ;
+	position:relative;
+	background-color:#F26101;
+	display: block;
+	width: 127px;
+	height: 38px;
+	margin-top: 45px;
+	right: 50px;
+	padding: 14px 5px;
+	color: white;
+	font-family: 'ubuntu';
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+
+
+	-webkit-transform: rotate(-90deg);
+	  -moz-transform: rotate(-90deg);
+	  -ms-transform: rotate(-90deg);
+	  -o-transform: rotate(-90deg);
+	  transform: rotate(-90deg);
+
+	  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+	  -webkit-transform-origin: 50% 50%;
+	  -moz-transform-origin: 50% 50%;
+	  -ms-transform-origin: 50% 50%;
+	  -o-transform-origin: 50% 50%;
+	  transform-origin: 50% 50%;
+
+	  /* Should be unset in IE9+ I think. */
+	  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
 .fa {
     color: #F26101;
-}
+
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
 /* Small devices (tablets, 768px and up) */
 
+@media (min-width: 768px) {
 
-@media (min-width: 768px) { 
 	#signup {
 		border-left: 1px solid #cccccc;
 	}
@@ -213,7 +285,7 @@ div#player-table {
  }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
 
 
 }
