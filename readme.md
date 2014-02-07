@@ -2,7 +2,7 @@
 
 Bladerdash allows users to play this classic board game with their friends on multiple browsers with real-time updates.
 
-![](./doc/screenshots/screenshot.png)
+![](./doc/screenshots/Screenshot.png)
 
 ##Rules of the Game
 1. Create a game or join someone else's.
