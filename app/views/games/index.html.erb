@@ -11,7 +11,7 @@
     	<li>The person who opened the game starts it when their friends have joined.</li>
     	<li>We give you a random word, make up the most believable definition you can.</li>
     	<li>When all definitions are submitted we will show them along with the real one.</li>
-    	<li>Vote for the one you think is the correct. No cheating!</li>
+    	<li>Vote for the one you think is correct. No cheating!</li>
     	<li>You get a point for every vote your definition gets and two points for guessing the correct definition</li>
     	<li>Whoever has the most points after seven rounds wins!</li>
     </ol>
@@ -22,7 +22,7 @@
 <ul id="roomView" class="list-unstyled">
 	<% @games.each do |game| %>
   	<% if game.in_session == false %>
-  	 <li><a class="game-room" id="<%= game.id %>" href="<%= game_path(game) %>"><%= game.players.first.user.name %>'s Game Room</a></li>
+  	 <li><a class="game-room" id="<%= game.id %>" href="<%= game_path(game) %>"><% if game.players %><%= game.players.first.user.name %>'s<% end %> Game Room</a></li>
   	<% end %>
 	<% end %>
 </ul>
