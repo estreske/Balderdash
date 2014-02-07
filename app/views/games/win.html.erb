@@ -16,10 +16,10 @@
 <div id="winner">
   
   <% if @winners.count == 1 %>
-  <%= image_tag "winner.gif", class: 'bullshit win' %>
+  <img src="http://newgifs.com/images/full/jumping-over-the-bull.gif" />
     <h1>Congratulations <%= @winners.first.user.name %>!</h1>
   <% elsif @winners.count > 1 %>
-    <%= image_tag "bull.gif", class: 'bullshit win' %>
+    <img src="http://i.minus.com/ibnIhUYOjOKNds.gif" />
     <% @winners.each do |winner| %>
     <h1><%= winner.user.name %></h1>
     <% end %>
