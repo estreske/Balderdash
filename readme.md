@@ -52,6 +52,20 @@ RoundView.prototype = {
 };
 ```
 
+##URL
+
+http://balderdash.herokuapp.com
+
 ##Contact
 
-For any additional information or suggestions, please contact Eric Streske at estreske@gmail.com. 
+For any additional information or suggestions, please contact any one of the below contributors:
+
+Eric Streske - estreske@gmail.com
+
+Sarah Adler - sarah.e.adler@gmail.com
+
+Richard Sung - 
+
+John Gordon - johnsamuelgordon@gmail.com
+
+Brad Wertman - brad.wertman@leanmeanz.com  
