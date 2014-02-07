@@ -27,7 +27,7 @@ class Game < ActiveRecord::Base
     games = {}
     Game.all.each do |game|
       if game.in_session == false
-        if game.players
+        unless game.players.empty?
           games[game.id] = game.players.first.user.name
         else
           games[game.id] = 'Nobody'

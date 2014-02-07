@@ -265,6 +265,78 @@ h4#tab{
 	border-color: #304269;
 }
 
+/* Set-up */
+body {
+-webkit-perspective: 1000px; /* <-NB */
+}
+
+/* Container box to set the sides relative to */
+.cube {
+  /* color: white; */
+width: 60%;
+text-align: center;
+margin: 0 auto;
+height: 100px;
+-webkit-transition: -webkit-transform .33s;
+transition: transform .33s; /* Animate the transform properties */
+
+-webkit-transform-style: preserve-3d;
+transform-style: preserve-3d; /* <-NB */
+}
+
+/* The two faces of the cube */
+.flippety,.flop {
+background-color: #D9E8F5;
+/*background: rgb(247, 247, 247); */
+border: 1px solid rgba(147, 184, 189, .8);
+
+-webkit-border-radius: 5px;
+border-radius: 5px;
+
+/*-webkit-box-shadow: 0 5px 20px rgba(105, 108, 109, .3), 0 0 8px 5px rgba(208, 223, 226, .4) inset;
+*//*box-shadow: 0 5px 20px rgba(105, 108, 109, .3), 0 0 8px 5px rgba(208, 223, 226, .4) inset;*/
+height: 50px;
+}
+
+/* Position the faces */
+.flippety {
+-webkit-transform: translateZ(25px);
+transform: translateZ(25px);
+}
+
+.flop {
+  line-height: 20px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 100%;
+  padding: 5px;
+  -webkit-transform: rotateX(-90deg) translateZ(-25px);
+  transform: rotateX(-90deg) translateZ(-25px);
+}
+
+/* Rotate the cube */
+.cube.active {
+-webkit-transform: rotateX(89deg);
+transform: rotateX(89deg); /* Text bleed at 90º */
+}
+
+#pick-list {
+	margin: 50px 0px;
+}
+
+.btn-link {
+	font-family: 'vollkorn', serif;
+	color: black;
+}
+
+.btn-link:focus {
+	border: none;
+}
+
+.btn-link:hover {
+	text-decoration:none;
+}
+
 
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */

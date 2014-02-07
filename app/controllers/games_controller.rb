@@ -120,9 +120,9 @@ class GamesController < ApplicationController
 		respond_to do |format|
 			format.json do
 				if current_round.all_submitted?
-					render :json => {status: 'all_submitted'}
-				else
-					render :json => {status: 'waiting'}
+					render :json => {status: 'all_submitted', definitions: current_round.defs_to_json}
+				else 
+					render :json => {definitions: current_round.defs_to_json}
 				end
 			end
 		end

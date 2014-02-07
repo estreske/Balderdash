@@ -11,21 +11,12 @@
 
 <!-- If not all of the players have guessed yet -->
 
-<% if @game.rounds.last.definitions.count < (@game.players.count + 1) %>
 
-<!-- But this player has guessed-->
+<!-- If this player hasn't submitted yet -->
+<!-- Let them submit -->
+<% if @current_round.picked_players.include?(@current_player) == false %>
 
-
-	<% if @game.rounds.last.guessed_players.include?(@current_player) %>
-
-		<!-- Show them a spinning wheel while they wait -->
-
-		<i id="whirlybird2" class="fa fa-cog fa-spin fa-5x"></i>
-    <p>Waiting on other players</p>
-	<% else %>
-
-		<!-- Or if this player hasn't guessed yet -->
-		<!-- Let them guess -->
+	<% if @current_round.submitted_players.include?(@current_player) == false %>
 
 		<div class="def_input">
 			<form method="post" action="<%= definitions_path %>">
@@ -37,43 +28,44 @@
 			</form>
 			<p class="sidenote">Deffffinitely, brah!</p>
 		</div>
-	<% end %>
-
-<!-- If all the players have guessed -->
-
-<% elsif @game.rounds.last.guessed_players.count == @game.players.count && @game.rounds.last.picks.count < @game.players.count %>
-
-<!-- But this player has already picked -->
-
-	<% if @game.rounds.last.picked_players.include?(@current_player) %>
-
-<!-- Show them a spinning wheel  -->
-
-	<i id="whirlybird3" class="fa fa-cog fa-spin fa-5x"></i>
-  <p>Waiting on other players</p>
-<!-- But if this player hasn't picked yet -->
-
+	
 	<% else %>
 
-<!-- Let this player pick one of the definitions -->
+	
 
-	<p>Select the correct definition below:</p>
-	<hr>
 
-	<% @game.rounds.last.definitions.shuffle.each do |definition| %>
-		<form method="post" action="<%= picks_path %>">
-			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
-			<input type="hidden" name="definition_id" value="<%= definition.id %>">
-			<button class="btn btn-primary grey" type="submit" id="submit_<%= definition.id %>">
-			<%= definition.content %></button>
-		</form>
-		<% end %>
-	<% end %>
+<!-- Or if this player has submitted -->
+<!-- Show them a spinning wheel while they wait -->
+		<i id="whirlybird2" class="fa fa-cog fa-spin fa-5x"></i>
+<!-- And the definitions appear on the screen one by one  -->
+		<div id="pick-list">
+						
+						<!-- THEN FLIP OVER -->
+						<!-- JAVASCRIPT RENDERS HERE -->
+						<!-- AND THE USER CAN PICK-->
+						<% if @current_round.all_submitted? %>
+						<div id="define-me!"></div>
+						<% end %>
 
+		</div>
+
+
+	<% end  %>
+<% end  %>
+
+
+<!-- if this player has picked -->
+<!-- Show them a spinning wheel while they wait -->
+
+
+<% if @current_round.picked_players.include?(@current_player) && @current_round.picked_players.count < @game.players.count %>
+			<i id="whirlybird3" class="fa fa-cog fa-spin fa-5x"></i>
+
+<% end %>
 	<!-- If all the players have picked -->
 	<!-- Show what happened -->
-
-<% elsif @game.rounds.last.picks.count >= @game.players.count %>
+	
+	<% if @game.rounds.last.picks.count >= @game.players.count %>
 	<h4>The correct definition is:</h4>
 	<h2><%= @game.rounds.last.word.definition %></h2>
 	<ul class="list-unstyled">

@@ -121,11 +121,11 @@ RoundView.prototype = {
     var pathName = window.location.pathname;
     var self = this;
     $.ajax({
-      url: "/games/" + pathName.split("/")[2]+ '/rounds',
+      url: "/games/" + pathName.split("/")[2]+ '/picks',
       dataType: 'json',
       method: 'get',
       success: function(data){
-        if (data.status === 'all_submitted'){
+        if (data.status === 'all_picked'){
           clearInterval(self.interval); 
           location.reload();
         }
@@ -139,7 +139,21 @@ RoundView.prototype = {
   },
 };
 
+function Definition(id, content){
+  this.id = id;
+  this.content = content;
+}
+
+Definition.prototype = {
+  render: function(){
+    var $newform = $('<form method="post" action="/picks"><input name="authenticity_token" type="hidden" value="' + token + '"><input type="hidden" name="definition_id" value="' + this.id + '"><div class="cube"><div class="flippety"></div><div class="flop"><button class="btn-link" type="submit">' + this.content + '</button></div></div></div></form>')
+    return $newform
+  }
+}
+
 function DefinitionView(){
+  var definitions = []
+  this.$picklist = $('#pick-list')
   this.setSync();
 }
 
@@ -154,17 +168,37 @@ DefinitionView.prototype = {
     var self = this;
     var pathName = window.location.pathname;
     $.ajax({
-      url: "/games/" + pathName.split("/")[2] + '/picks',
+      url: "/games/" + pathName.split("/")[2] + '/rounds',
       dataType: 'json',
       method: 'get',
       success: function(data){
-        if (data.status === 'all_picked'){
+        console.log(data);
+        self.definitions = [];
+        var definitions = data["definitions"];
+
+        for (i in definitions){
+          var id = i;
+          var content = definitions[i];
+          var definition = new Definition(id, content);
+          self.definitions.push(definition);
+          self.render();
+        }
+        if (data.status === 'all_submitted'){
           clearInterval(self.interval); 
-          location.reload();
+          self.render();
+          setTimeout(function(){self.$picklist.find('.cube').addClass('active')}, 1000);
+          $('#whirlybird2').remove();
         }
       }
     })
   },
+  render: function(){
+    var self = this;
+    this.$picklist.empty();
+    $(this.definitions).each(function(index, definition) {
+      self.$picklist.append(definition.render());
+    });
+  }
 };
 
 function Room(game_id, name){
@@ -234,10 +268,11 @@ $(function(){
       new GameView();
     }
     else if  ($('#whirlybird2').length == 1) {
-      new RoundView();
+      new DefinitionView();
     }
     else if ($('#whirlybird3').length == 1){
-      new DefinitionView();
+      new RoundView();
+      $('#pick-list').remove();
     }
   }
   else if ( pathName.split("/").length <= 3 && pathName.split("/").length != 1 && pathName.split("/")[1] == "games"){

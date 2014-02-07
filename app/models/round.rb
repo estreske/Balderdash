@@ -19,6 +19,20 @@ class Round < ActiveRecord::Base
     end
   end
 
+  def submitted_players 
+    definitions.map do |definition| 
+      definition.player
+    end
+  end
+
+  def defs_to_json 
+    definitions = {}
+    self.definitions.each do |definition|
+      definitions[definition.id] = definition.content
+    end
+    return definitions
+  end
+
   def all_picked?
     if self.picks.count == self.game.players.count
       return true

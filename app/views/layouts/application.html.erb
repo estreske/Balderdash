@@ -2,7 +2,8 @@
 <html>
 <head>
   <script> 
-    var user = <%= current_user.to_json(only: [:name, :id]).html_safe %>
+    var user = <%= current_user.to_json(only: [:name, :id]).html_safe %>;
+    var token = <%= form_authenticity_token.to_json.html_safe %>;
   </script>
   <script type="text/javascript" src="//use.typekit.net/wfq0vai.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
