@@ -64,7 +64,7 @@
 		<form method="post" action="<%= picks_path %>">
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 			<input type="hidden" name="definition_id" value="<%= definition.id %>">
-			<button class="btn btn-primary" type="submit" id="submit_<%= definition.id %>">
+			<button class="btn btn-primary grey" type="submit" id="submit_<%= definition.id %>">
 			<%= definition.content %></button>
 		</form>
 		<% end %>
@@ -100,7 +100,7 @@
 		<form method="post" action="<%= rounds_path %>">
 			<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
 			<input type="hidden" name="game_id" value="<%= @game.id %>">
-			<button class"btn btn-primary" type="submit" id="submit">Next Round</button>
+			<button class="btn btn-primary" type="submit" id="submit">Next Round</button>
 		</form>
 
 	<% elsif @game.rounds.count == 7 %>
