@@ -159,7 +159,7 @@ function Definition(id, content){
 
 Definition.prototype = {
   render: function(){
-    var $newform = $('<form method="post" action="/picks"><input name="authenticity_token" type="hidden" value="' + token + '"><input type="hidden" name="definition_id" value="' + this.id + '"><div class="cube"><div class="flippety"></div><div class="flop"><button class="btn-link" type="submit">' + this.content + '</button></div></div></div></form>')
+    var $newform = $('<form method="post" action="/picks"><input name="authenticity_token" type="hidden" value="' + token + '"><input type="hidden" name="definition_id" value="' + this.id + '"><div class="cube"><div class="flippety"></div><button class="btn-link" type="submit"><div class="flop">' + this.content + '</div></button></div></div></form>')
     return $newform
   }
 }

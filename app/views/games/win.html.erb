@@ -13,11 +13,6 @@
     </tbody>
   </table>
 </div>
-
-<%= image_tag "bullshit.png", class: 'bullshit win' %>
-
-
-
 <div id="winner">
   
   <% if @winners.count == 1 %>
@@ -33,5 +28,5 @@
 
 </div>
 
-<%= link_to "Return to Games Page", games_path %>
+<%= link_to "Return to Games Page", games_path, class: "btn btn-primary" %>
 
