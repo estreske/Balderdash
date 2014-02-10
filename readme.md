@@ -64,7 +64,7 @@ Eric Streske - estreske@gmail.com
 
 Sarah Adler - sarah.e.adler@gmail.com
 
-Richard Sung - 
+Richard Sung - rsung26@gmail.com
 
 John Gordon - johnsamuelgordon@gmail.com
 
