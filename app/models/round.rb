@@ -27,7 +27,7 @@ class Round < ActiveRecord::Base
 
   def defs_to_json 
     definitions = {}
-    self.definitions.each do |definition|
+    self.definitions.shuffle.each do |definition|
       definitions[definition.id] = definition.content
     end
     return definitions
