@@ -208,9 +208,23 @@ DefinitionView.prototype = {
   render: function(){
     var self = this;
     this.$picklist.empty();
-    $(this.definitions).each(function(index, definition) {
+    var shuffled = this.shuffle(this.definitions)
+    $(shuffled).each(function(index, definition) {
       self.$picklist.append(definition.render());
     });
+  },
+
+  shuffle: function(array) {
+    var counter = array.length, temp, index;
+    while (counter > 0) {
+        index = Math.floor(Math.random() * counter);
+        counter--;
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+
+    return array;
   }
 };
 
