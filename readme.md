@@ -1,6 +1,6 @@
 #Balderdash
 
-Bladerdash allows users to play this classic board game with their friends on multiple browsers with real-time updates.
+Balderdash allows users to play this classic board game with their friends on multiple browsers with real-time updates.
 
 ![](./doc/screenshots/Screenshot.png)
 
