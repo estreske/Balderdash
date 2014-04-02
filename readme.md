@@ -52,6 +52,10 @@ RoundView.prototype = {
 };
 ```
 
+##ERD Diagram
+
+![](./doc/screenshots/balderdash_erd.png)
+
 ##URL
 
 http://balderdash.herokuapp.com
